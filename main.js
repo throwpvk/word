@@ -23,11 +23,11 @@ document.addEventListener("DOMContentLoaded", function () {
   const vocabExample = document.querySelector(".example");
 
   vocabWord?.addEventListener("click", () => {
-    showFooter("correct", "Đáp án đúng");
+    showFooter("correct", "Chính xác. Tuyệt vời!");
   });
 
   vocabMeaning?.addEventListener("click", () => {
-    showFooter("wrong", "Đáp án sai");
+    showFooter("wrong", "Sai mất rồi. Cố gắng chút nữa!");
   });
 
   vocabExample?.addEventListener("click", () => {
@@ -38,12 +38,15 @@ document.addEventListener("DOMContentLoaded", function () {
     footerBar.classList.add("show");
     footerBar.classList.remove("correct", "wrong");
 
+    let iconHtml = "";
     if (type === "correct") {
       footerBar.classList.add("correct");
+      iconHtml = `<i class="fa-solid fa-circle-check" style="margin-right:10px"></i>`;
     } else if (type === "wrong") {
       footerBar.classList.add("wrong");
+      iconHtml = `<i class="fa-solid fa-circle-xmark" style="margin-right:10px"></i>`;
     }
 
-    footerStatus.textContent = statusText;
+    footerStatus.innerHTML = iconHtml + statusText;
   }
 });
