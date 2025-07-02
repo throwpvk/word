@@ -68,3 +68,42 @@ document.addEventListener("DOMContentLoaded", function () {
     vocabMain.style.paddingBottom = "0";
   }
 });
+
+const themeToggle = document.getElementById("themeSelectToggle");
+const themeDropdown = document.getElementById("themeDropdown");
+const iconToggle = themeToggle.querySelector("i");
+
+// Toggle dropdown hiển thị
+themeToggle.addEventListener("click", () => {
+  themeDropdown.style.display =
+    themeDropdown.style.display === "flex" ? "none" : "flex";
+});
+
+// Click ra ngoài thì ẩn dropdown
+document.addEventListener("click", (e) => {
+  if (!themeToggle.contains(e.target) && !themeDropdown.contains(e.target)) {
+    themeDropdown.style.display = "none";
+  }
+});
+
+// Xử lý chọn theme
+themeDropdown.querySelectorAll("div").forEach((option) => {
+  option.addEventListener("click", () => {
+    const theme = option.getAttribute("data-theme");
+    const root = document.documentElement;
+
+    if (theme === "dark") {
+      root.style.setProperty("--color-bg", "#3c3d37");
+      root.style.setProperty("--color-bg-panel", "#1e201e");
+      root.style.setProperty("--color-text", "#ecdfcc");
+      iconToggle.classList.replace("fa-sun", "fa-moon");
+    } else {
+      root.style.setProperty("--color-bg", "#fff8e5");
+      root.style.setProperty("--color-bg-panel", "#fdf3d7");
+      root.style.setProperty("--color-text", "#403d39");
+      iconToggle.classList.replace("fa-moon", "fa-sun");
+    }
+
+    themeDropdown.style.display = "none";
+  });
+});

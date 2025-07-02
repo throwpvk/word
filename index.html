@@ -77,7 +77,6 @@
         </div>
         <div class="vocab-example">
           <p class="example">
-            <i class="fa-solid fa-lightbulb"></i>
             The sunset is beautiful today.
             <button class="example-audio" title="Phát âm ví dụ">
               <svg
@@ -95,9 +94,7 @@
               </svg>
             </button>
           </p>
-          <p class="example-translation">
-            <i class="fa-solid fa-arrow-right"></i>Hoàng hôn hôm nay thật đẹp.
-          </p>
+          <p class="example-translation">Hoàng hôn hôm nay thật đẹp.</p>
         </div>
       </div>
     </main>
@@ -105,14 +102,21 @@
     <!-- Settings Panel (Right) -->
     <aside class="settings-panel">
       <h2>Cài Đặt</h2>
-      <nav>
-        <ul>
-          <li class="active">Tốc độ phát âm: Trung bình</li>
-          <li>Chế độ ban đêm: Tắt</li>
-          <li>Thông báo: Bật</li>
-          <li>Ngôn ngữ: Tiếng Việt</li>
-        </ul>
-      </nav>
+      <div class="setting-group">
+        <div class="setting-item" id="themeSelectToggle">
+          <span class="label">Chế độ hiển thị</span>
+          <i class="fas fa-sun"></i>
+        </div>
+
+        <div class="setting-dropdown" id="themeDropdown">
+          <div data-theme="light">
+            Sáng<i class="fa-solid fa-sun light-mode-selector"></i>
+          </div>
+          <div data-theme="dark">
+            Tối<i class="fas fa-moon dark-mode-selector"></i>
+          </div>
+        </div>
+      </div>
     </aside>
 
     <!-- Footer Panel -->
