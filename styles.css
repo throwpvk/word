@@ -218,7 +218,7 @@ body {
 
 .audio-btn,
 .example-audio {
-  background: #f6f6f6;
+  background: #ffe4b5;
   border: none;
   border-radius: 12px;
   padding: 8px;
@@ -413,7 +413,7 @@ body {
 }
 
 .footer-next {
-  font-size: clamp(24px, 3.6vw, 32px);
+  font-size: clamp(20px, 3.2vw, 26px);
 }
 
 .toggle-footer-btn {
