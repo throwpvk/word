@@ -153,7 +153,6 @@ body {
 .vocab-card {
   background: var(--color-bg-panel);
   padding: 50px 16px 16px 16px;
-  border-radius: 16px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   text-align: left;
   transition: all 0.3s ease;
@@ -265,7 +264,7 @@ body {
   bottom: 0;
   left: 0;
   right: 0;
-  height: 250px;
+  height: 150px;
   background: var(--color-bg-panel);
   visibility: hidden;
   opacity: 0;

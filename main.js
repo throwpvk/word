@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const footerBar = document.querySelector(".footer-bar");
   const footerStatus = document.querySelector(".footer-status");
+  const vocabMain = document.querySelector(".vocab-main");
 
   // Toggle Menu Panel
   menuBtn?.addEventListener("click", () => {
@@ -21,6 +22,7 @@ document.addEventListener("DOMContentLoaded", function () {
   const vocabWord = document.querySelector(".vocab-word");
   const vocabMeaning = document.querySelector(".vocab-meaning");
   const vocabExample = document.querySelector(".example");
+  const h1 = document.querySelector("h1");
 
   vocabWord?.addEventListener("click", () => {
     showFooter("correct", "Chính xác. Tuyệt vời!");
@@ -32,6 +34,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
   vocabExample?.addEventListener("click", () => {
     showFooter("", "");
+  });
+
+  h1?.addEventListener("click", () => {
+    hideFooter();
   });
 
   function showFooter(type, statusText) {
@@ -48,5 +54,17 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     footerStatus.innerHTML = iconHtml + statusText;
+
+    // Delay paddingBottom để khớp với animation của footer
+    setTimeout(() => {
+      const footerHeight = footerBar.offsetHeight;
+      vocabMain.style.paddingBottom = footerHeight + "px";
+    }, 300); // delay đúng bằng transition duration của footer
+  }
+
+  function hideFooter() {
+    footerBar.classList.remove("show", "correct", "wrong");
+    footerStatus.innerHTML = "";
+    vocabMain.style.paddingBottom = "0";
   }
 });
