@@ -152,7 +152,7 @@ body {
 
 .vocab-card {
   background: var(--color-bg-panel);
-  padding: 50px 16px 16px 16px;
+  padding: 40px 16px 16px 16px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   text-align: left;
   transition: all 0.3s ease;
@@ -167,61 +167,53 @@ body {
 .vocab-label {
   font-size: 14px;
   color: var(--color-muted);
-  margin-bottom: 4px;
   display: block;
 }
 
 .vocab-word {
-  font-size: 28px;
   font-weight: 700;
   color: var(--color-text);
   display: flex;
   align-items: center;
   gap: 16px;
   position: relative;
-  padding: 10px 16px 10px 0;
 }
 
 .vocab-meaning {
-  font-size: 18px;
   color: var(--color-text);
-  margin-bottom: 22px;
-  padding: 10px 16px 10px 0;
+  margin-bottom: 16px;
 }
 
 .vocab-type {
   display: inline-flex;
   align-items: center;
   gap: 8px;
-  margin-bottom: 20px;
+  margin-bottom: 30px;
   background: var(--highlight-color);
-  padding: 8px 12px;
+  padding: 4px 16px;
   border-radius: 12px;
 }
 
 .vocab-type span {
-  font-size: 14px;
 }
 
 .vocab-example {
   margin-bottom: 16px;
 }
 
-.example {
-  font-size: 16px;
+.example,
+.example-translation {
   color: var(--color-text);
   display: flex;
   align-items: center;
-  gap: 16px;
+  gap: 10px;
   position: relative;
-  padding: 10px 16px 10px 0;
+  margin-bottom: 10px;
 }
 
 .example-translation {
-  font-size: 16px;
   font-style: italic;
   color: var(--color-text);
-  padding: 10px 16px 10px 0;
 }
 
 .audio-btn,
@@ -230,8 +222,8 @@ body {
   border: none;
   border-radius: 12px;
   padding: 8px;
-  width: 50px;
-  height: 50px;
+  width: 40px;
+  height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -291,6 +283,10 @@ body {
 
 .footer-bar.wrong {
   background: var(--color-wrong);
+}
+
+.footer-bar.show .footer-next {
+  color: var(--color-text);
 }
 
 .footer-bar.correct .footer-next {
@@ -378,7 +374,7 @@ body {
   }
 
   .vocab-card {
-    padding: 50px;
+    padding: 40px;
   }
 }
 
