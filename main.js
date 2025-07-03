@@ -1,149 +1,152 @@
-document.addEventListener("DOMContentLoaded", function () {
-  const menuBtn = document.querySelector(".menu-btn");
-  const settingsBtn = document.querySelector(".settings-btn");
-  const menuPanel = document.querySelector(".menu-panel");
-  const settingsPanel = document.querySelector(".settings-panel");
+// ===================== DOM ELEMENTS =====================
+const menuBtn = document.querySelector(".menu-btn");
+const settingsBtn = document.querySelector(".settings-btn");
+const menuPanel = document.querySelector(".menu-panel");
+const settingsPanel = document.querySelector(".settings-panel");
 
-  const footerBar = document.querySelector(".footer-bar");
-  const footerStatus = document.querySelector(".footer-status");
-  const vocabMain = document.querySelector(".vocab-main");
+const headerBar = document.querySelector(".header-bar");
+const footerBar = document.querySelector(".footer-bar");
+const footerStatus = document.querySelector(".footer-status");
+const vocabMain = document.querySelector(".vocab-main");
 
-  // Toggle Menu Panel
-  menuBtn?.addEventListener("click", () => {
-    menuPanel.classList.toggle("show");
-    menuPanel.style.zIndex = "2010";
-    settingsPanel.style.zIndex = "2009";
-    if (menuPanel.classList.contains("show")) {
-      menuBtn.innerHTML = '<i class="fa-solid fa-xmark"></i>';
-    } else {
-      menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
-    }
-  });
+const vocabWord = document.querySelector(".vocab-word");
+const vocabMeaning = document.querySelector(".vocab-meaning");
+const vocabExample = document.querySelector(".example");
+const h1 = document.querySelector("h1");
 
-  // Toggle Settings Panel
-  settingsBtn?.addEventListener("click", () => {
-    settingsPanel.classList.toggle("show");
-    menuPanel.style.zIndex = "2009";
-    settingsPanel.style.zIndex = "2010";
-    if (settingsPanel.classList.contains("show")) {
-      settingsBtn.innerHTML = '<i class="fa-solid fa-xmark"></i>';
-    } else {
-      settingsBtn.innerHTML = '<i class="fas fa-gear"></i>';
-    }
-  });
-
-  // Footer logic
-  const vocabWord = document.querySelector(".vocab-word");
-  const vocabMeaning = document.querySelector(".vocab-meaning");
-  const vocabExample = document.querySelector(".example");
-  const h1 = document.querySelector("h1");
-
-  vocabWord?.addEventListener("click", () => {
-    showFooter("correct", "Chính xác. Tuyệt vời!");
-  });
-
-  vocabMeaning?.addEventListener("click", () => {
-    showFooter("wrong", "Sai mất rồi. Cố gắng chút nữa!");
-  });
-
-  vocabExample?.addEventListener("click", () => {
-    showFooter("", "");
-  });
-
-  h1?.addEventListener("click", () => {
-    hideFooter();
-  });
-
-  function showFooter(type, statusText) {
-    footerBar.classList.add("show");
-    footerBar.classList.remove("correct", "wrong");
-
-    let iconHtml = "";
-    if (type === "correct") {
-      footerBar.classList.add("correct");
-      iconHtml = `<i class="fa-solid fa-circle-check" style="margin-right:10px"></i>`;
-    } else if (type === "wrong") {
-      footerBar.classList.add("wrong");
-      iconHtml = `<i class="fa-solid fa-circle-xmark" style="margin-right:10px"></i>`;
-    }
-
-    footerStatus.innerHTML = iconHtml + statusText;
-
-    // Delay paddingBottom để khớp với animation của footer
-    setTimeout(() => {
-      const footerHeight = footerBar.offsetHeight;
-      vocabMain.style.paddingBottom = footerHeight + "px";
-    }, 300); // delay đúng bằng transition duration của footer
-  }
-
-  function hideFooter() {
-    footerBar.classList.remove("show", "correct", "wrong");
-    footerStatus.innerHTML = "";
-    vocabMain.style.paddingBottom = "0";
-  }
+// ===================== MENU TOGGLE =====================
+menuBtn?.addEventListener("pointerup", () => {
+  const isShown = menuPanel.classList.toggle("show");
+  menuPanel.style.zIndex = "2010";
+  settingsPanel.style.zIndex = "2009";
+  menuBtn.innerHTML = isShown
+    ? `<i class="fa-solid fa-xmark"></i>`
+    : `<i class="fas fa-bars"></i>`;
 });
 
+// ===================== SETTINGS TOGGLE =====================
+settingsBtn?.addEventListener("pointerup", () => {
+  const isShown = settingsPanel.classList.toggle("show");
+  menuPanel.style.zIndex = "2009";
+  settingsPanel.style.zIndex = "2010";
+  settingsBtn.innerHTML = isShown
+    ? `<i class="fa-solid fa-xmark"></i>`
+    : `<i class="fas fa-gear"></i>`;
+});
+
+vocabMain?.addEventListener("pointerup", hidePanel);
+headerBar?.addEventListener("pointerup", hidePanel);
+
+function hidePanel() {
+  menuPanel.classList.remove("show");
+  settingsPanel.classList.remove("show");
+
+  menuBtn.innerHTML = `<i class="fas fa-bars"></i>`;
+  settingsBtn.innerHTML = `<i class="fas fa-gear"></i>`;
+}
+
+// ===================== FOOTER STATUS =====================
+function showFooter(type, text) {
+  footerBar.className = `footer-bar show ${type}`;
+  const iconMap = {
+    correct: `<i class="fa-solid fa-circle-check" style="margin-right:10px"></i>`,
+    wrong: `<i class="fa-solid fa-circle-xmark" style="margin-right:10px"></i>`,
+  };
+  footerStatus.innerHTML = (iconMap[type] || "") + text;
+
+  setTimeout(() => {
+    vocabMain.style.paddingBottom = `${footerBar.offsetHeight}px`;
+  }, 300);
+}
+
+function hideFooter() {
+  footerBar.className = "footer-bar";
+  footerStatus.innerHTML = "";
+  vocabMain.style.paddingBottom = "0";
+}
+
+vocabWord?.addEventListener("pointerup", () =>
+  showFooter("correct", "Chính xác. Tuyệt vời!")
+);
+vocabMeaning?.addEventListener("pointerup", () =>
+  showFooter("wrong", "Sai mất rồi. Cố gắng chút nữa!")
+);
+vocabExample?.addEventListener("pointerup", () => showFooter("", ""));
+h1?.addEventListener("pointerup", hideFooter);
+// ===================== THEME DROPDOWN =====================
 const themeToggle = document.getElementById("themeSelectToggle");
 const themeDropdown = document.getElementById("themeDropdown");
 const iconToggle = themeToggle.querySelector("i");
 
-// Toggle dropdown hiển thị
-themeToggle.addEventListener("click", () => {
+themeToggle.addEventListener("pointerup", () => {
   themeDropdown.style.display =
     themeDropdown.style.display === "flex" ? "none" : "flex";
 });
 
-// Click ra ngoài thì ẩn dropdown
-document.addEventListener("click", (e) => {
+// Click outside to close dropdown
+document.addEventListener("pointerup", (e) => {
   if (!themeToggle.contains(e.target) && !themeDropdown.contains(e.target)) {
     themeDropdown.style.display = "none";
   }
 });
 
-// Xử lý chọn theme
+// Change theme
 themeDropdown.querySelectorAll("div").forEach((option) => {
-  option.addEventListener("click", () => {
-    const theme = option.getAttribute("data-theme");
+  option.addEventListener("pointerup", () => {
+    const theme = option.dataset.theme;
     const root = document.documentElement;
 
-    if (theme === "dark") {
-      root.style.setProperty("--color-bg", "#292929"); // #3c3d37
-      root.style.setProperty("--color-bg-panel", "#1e201e");
-      root.style.setProperty("--color-text", "#ecdfcc");
-      iconToggle.classList.replace("fa-sun", "fa-moon");
-    } else {
-      root.style.setProperty("--color-bg", "#fff8e5");
-      root.style.setProperty("--color-bg-panel", "#fdf3d7");
-      root.style.setProperty("--color-text", "#403d39");
-      iconToggle.classList.replace("fa-moon", "fa-sun");
+    const themes = {
+      dark: {
+        "--color-bg": "#292929",
+        "--color-bg-panel": "#1e201e",
+        "--color-text": "#ecdfcc",
+        icon: "fa-moon",
+      },
+      light: {
+        "--color-bg": "#fff8e5",
+        "--color-bg-panel": "#fdf3d7",
+        "--color-text": "#403d39",
+        icon: "fa-sun",
+      },
+    };
+
+    const selected = themes[theme];
+    if (selected) {
+      for (const prop in selected) {
+        if (prop.startsWith("--")) {
+          root.style.setProperty(prop, selected[prop]);
+        }
+      }
+      iconToggle.className = `fa-solid ${selected.icon}`;
     }
 
     themeDropdown.style.display = "none";
   });
 });
 
-window.callback = function (data) {
-  console.log("✅ Dữ liệu JSONP từ Google Sheets:", data);
+// Nhấn vào list
+document.querySelectorAll(".lesson-menu > li.level-item").forEach((item) => {
+  item.addEventListener("click", function (e) {
+    document.querySelectorAll(".sub-item").forEach((subItem) => {
+      subItem.classList.remove("active");
+    });
+    if (e.currentTarget !== e.target) {
+      if (e.target.classList.contains("sub-item")) {
+        e.target.classList.add("active");
+      }
+    } else {
+      // Bỏ active tất cả các mục khác
+      document
+        .querySelectorAll(".lesson-menu > li.level-item")
+        .forEach((li) => {
+          if (li !== item) {
+            li.classList.remove("active");
+          }
+        });
 
-  const vocab = data[0]; // lấy từ đầu tiên (sau này có thể random hoặc next)
-  if (!vocab) return;
-
-  // Gán dữ liệu vào HTML
-  document.querySelector(".word-text").textContent = vocab.word || "–";
-  document.querySelector(".vocab-meaning").textContent = vocab.meaning || "–";
-  document.querySelector(".vocab-type span").textContent = vocab.type || "–";
-
-  const exampleEl = document.querySelector(".example");
-  if (exampleEl?.firstChild?.nodeType === 3) {
-    exampleEl.firstChild.textContent = vocab.example || "–";
-  }
-
-  document.querySelector(".example-translation").textContent =
-    vocab.exampleVi || "–";
-};
-
-// Tải dữ liệu JSONP từ Google Apps Script
-const script = document.createElement("script");
-script.src =
-  "https://script.google.com/macros/s/AKfycbx55xOFDsk2ADy8uqUR0BdUYXCGUM_jZF_3KmaMcmki7pEaYm8EKrNQIQEA__bfgBgGmg/exec?callback=callback";
-document.body.appendChild(script);
+      // Toggle chính item được click
+      item.classList.toggle("active");
+    }
+  });
+});

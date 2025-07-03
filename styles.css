@@ -18,7 +18,7 @@
   --color-wrong: #feb2b2;
   --color-wrong-content: #c73c3c;
   --color-default: #ffca58;
-  --color-default-content: #f09319;
+  --color-default-content: #ffa400;
 }
 
 * {
@@ -75,7 +75,7 @@ body {
   align-items: center;
   justify-content: center;
   border-radius: 8px;
-  transition: all 0.3s ease;
+  transition: all 0.5s ease;
 }
 
 /* Panels */
@@ -88,7 +88,7 @@ body {
   background: var(--color-bg-panel);
   padding: 22px;
   transform: translateX(-100%);
-  transition: all 0.3s ease;
+  transition: all 0.5s ease;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   z-index: 2001;
 }
@@ -106,7 +106,7 @@ body {
   justify-content: flex-end;
   align-items: center;
   padding: 16px;
-  transition: all 0.3s ease 1s;
+  transition: all 0.5s ease 1s;
 }
 
 .settings-btn {
@@ -122,7 +122,7 @@ body {
   justify-content: flex-start;
   align-items: center;
   padding: 16px;
-  transition: all 0.3s ease 1s;
+  transition: all 0.5s ease 1s;
 }
 
 .menu-panel.show,
@@ -161,40 +161,8 @@ body {
   text-align: left;
 }
 
-.menu-panel nav ul,
-.settings-panel nav ul {
+.menu-panel nav ul {
   list-style: none;
-}
-
-.menu-panel nav ul li,
-.settings-panel nav ul li {
-}
-
-.menu-panel nav ul li,
-.settings-panel nav ul li {
-  display: block;
-  padding: 10px 16px;
-  text-decoration: none;
-  color: var(--color-text);
-  transition: all 0.3s ease;
-  cursor: pointer;
-}
-
-.menu-panel nav ul li:hover,
-.settings-panel nav ul li:hover {
-  opacity: 0.5;
-}
-
-.menu-panel nav ul li:active,
-.settings-panel nav ul li:active {
-  opacity: 0.8;
-}
-
-.menu-panel nav ul li.active,
-.settings-panel nav ul li.active {
-  font-weight: bold;
-  color: var(--color-correct-content);
-  font-size: 20px;
 }
 
 /* Main Content */
@@ -212,10 +180,10 @@ body {
 
 .vocab-card {
   background: var(--color-bg);
-  padding: 40px 25px 16px 16px;
+  padding: 30px 25px 16px 16px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   text-align: left;
-  transition: all 0.3s ease;
+  transition: all 0.5s ease;
   max-width: 100%;
   width: 100%;
 }
@@ -295,7 +263,7 @@ body {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.5s ease;
   position: absolute;
   top: 0;
   right: 0;
@@ -316,7 +284,7 @@ body {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   z-index: 1000;
   transform: translateY(100%);
-  transition: all 0.3s ease;
+  transition: all 0.5s ease;
 }
 
 .footer-bar.show {
@@ -394,7 +362,7 @@ body {
   font-size: 18px;
   font-weight: 600;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.5s ease;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
@@ -404,7 +372,7 @@ body {
     max-width: 400px;
   }
   .vocab-card {
-    padding: 40px;
+    padding: 30px 40px 0 40px;
   }
 }
 
@@ -456,7 +424,7 @@ body {
   }
 }
 
-.vocab-word {
+.vocab-word .word-text {
   font-size: clamp(32px, 6vw, 54px);
 }
 
@@ -483,7 +451,7 @@ body {
 .settings-btn,
 .audio-btn,
 .example-audio {
-  transition: opacity 0.3s ease;
+  transition: opacity 0.5s ease;
 }
 
 /* Hover: sáng + bóng nhẹ */
@@ -542,7 +510,7 @@ body {
   padding: 12px 16px;
   cursor: pointer;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+  transition: background-color 0.5s ease, box-shadow 0.5s ease;
 }
 
 .setting-item:hover {
@@ -596,4 +564,58 @@ body {
 
 .setting-dropdown i {
   color: var(--color-text);
+}
+
+/* Menu */
+.menu-panel nav ul li {
+  display: block;
+  padding: 10px 16px;
+  text-decoration: none;
+  color: var(--color-text);
+  transition: all 0.5s ease;
+  cursor: pointer;
+}
+
+.menu-panel nav ul li.active {
+  font-weight: bold;
+  color: var(--color-correct-content);
+  font-size: 20px;
+}
+
+.menu-panel nav ul li ul li {
+  transition: all 0.5s ease;
+}
+
+.menu-panel nav ul li ul li.active {
+  font-weight: normal;
+  color: var(--color-correct-content);
+  font-size: 17px;
+}
+
+.lesson-menu .sub-menu {
+  list-style: none;
+  padding-left: 20px;
+  margin-top: 4px;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.5s ease, opacity 0.5s ease;
+}
+
+.lesson-menu .sub-menu li {
+  padding: 10px 12px;
+  font-weight: normal;
+  font-size: 16px;
+  color: var(--color-text);
+  cursor: pointer;
+}
+
+.lesson-menu .sub-menu li:hover {
+  opacity: 0.6;
+}
+
+/* Khi mở sub-menu */
+.lesson-menu > li.level-item.active > .sub-menu {
+  max-height: 500px; /* đủ để chứa các mục, có thể điều chỉnh nếu nhiều item */
+  opacity: 1;
 }
