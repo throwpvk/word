@@ -11,11 +11,25 @@ document.addEventListener("DOMContentLoaded", function () {
   // Toggle Menu Panel
   menuBtn?.addEventListener("click", () => {
     menuPanel.classList.toggle("show");
+    menuPanel.style.zIndex = "2010";
+    settingsPanel.style.zIndex = "2009";
+    if (menuPanel.classList.contains("show")) {
+      menuBtn.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+    } else {
+      menuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+    }
   });
 
   // Toggle Settings Panel
   settingsBtn?.addEventListener("click", () => {
     settingsPanel.classList.toggle("show");
+    menuPanel.style.zIndex = "2009";
+    settingsPanel.style.zIndex = "2010";
+    if (settingsPanel.classList.contains("show")) {
+      settingsBtn.innerHTML = '<i class="fa-solid fa-xmark"></i>';
+    } else {
+      settingsBtn.innerHTML = '<i class="fas fa-gear"></i>';
+    }
   });
 
   // Footer logic
