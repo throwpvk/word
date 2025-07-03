@@ -121,3 +121,29 @@ themeDropdown.querySelectorAll("div").forEach((option) => {
     themeDropdown.style.display = "none";
   });
 });
+
+window.callback = function (data) {
+  console.log("✅ Dữ liệu JSONP từ Google Sheets:", data);
+
+  const vocab = data[0]; // lấy từ đầu tiên (sau này có thể random hoặc next)
+  if (!vocab) return;
+
+  // Gán dữ liệu vào HTML
+  document.querySelector(".word-text").textContent = vocab.word || "–";
+  document.querySelector(".vocab-meaning").textContent = vocab.meaning || "–";
+  document.querySelector(".vocab-type span").textContent = vocab.type || "–";
+
+  const exampleEl = document.querySelector(".example");
+  if (exampleEl?.firstChild?.nodeType === 3) {
+    exampleEl.firstChild.textContent = vocab.example || "–";
+  }
+
+  document.querySelector(".example-translation").textContent =
+    vocab.exampleVi || "–";
+};
+
+// Tải dữ liệu JSONP từ Google Apps Script
+const script = document.createElement("script");
+script.src =
+  "https://script.google.com/macros/s/AKfycbx55xOFDsk2ADy8uqUR0BdUYXCGUM_jZF_3KmaMcmki7pEaYm8EKrNQIQEA__bfgBgGmg/exec?callback=callback";
+document.body.appendChild(script);
