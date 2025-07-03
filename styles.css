@@ -415,6 +415,11 @@ body {
     max-width: 300px;
   }
 
+  .menu-btn,
+  .settings-btn {
+    display: none;
+  }
+
   .menu-panel,
   .settings-panel {
     transform: translateX(0);
