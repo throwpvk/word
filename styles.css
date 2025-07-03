@@ -188,39 +188,39 @@ body {
   width: 100%;
 }
 
-.vocab-item {
-  margin-bottom: 16px;
-}
-
 .vocab-label {
   font-size: 14px;
   color: var(--color-secondary);
   display: block;
+  margin-bottom: 5px;
 }
 
-.vocab-word {
+.word-text {
   font-weight: 700;
   color: var(--color-text);
   display: inline-block;
   align-items: center;
   gap: 16px;
   position: relative;
+  margin-bottom: 16px;
 }
 
 .vocab-meaning {
   color: var(--color-text);
   margin-bottom: 16px;
+  padding-bottom: 20px;
+  border-bottom: 3px var(--color-correct) solid;
 }
 
 .vocab-type {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  margin-bottom: 30px;
+  justify-content: center;
   background: var(--color-correct);
   color: #403d39;
-  padding: 2px 12px;
-  border-radius: 12px;
+  border-radius: 20px;
+  width: 80px;
+  height: 40px;
 }
 
 .vocab-example {
@@ -234,40 +234,40 @@ body {
   align-items: center;
   gap: 10px;
   margin-bottom: 10px;
-  position: relative;
-  display: inline-block;
 }
 
 .example-translation {
-  color: var(--color-text);
+  color: var(--color-secondary);
   display: flex;
   align-items: center;
   gap: 10px;
   margin-bottom: 10px;
-}
-
-.example-translation {
   font-style: italic;
-  color: var(--color-text);
 }
 
-.audio-btn,
-.example-audio {
+.vocab-sub-item {
+  display: flex;
+  justify-content: flex-start;
+  gap: 20px;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.audio-btn {
   background: var(--color-default);
   border: none;
-  border-radius: 12px 12px 12px 0;
-  padding: 8px;
-  width: 40px;
+  border-radius: 20px;
+  padding: 0px 28px;
+  width: 80px;
   height: 40px;
   display: flex;
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all 0.5s ease;
-  position: absolute;
+  /* position: absolute;
   top: 0;
   right: 0;
-  transform: translateY(-100%) translateX(50%);
+  transform: translateY(-100%) translateX(50%); */
 }
 
 /* Footer Panel */
@@ -356,6 +356,7 @@ body {
 
 .footer-next {
   background: var(--color-default-content);
+  color: var(--color-text-light);
   border: none;
   padding: 20px 100px;
   border-radius: 16px;
@@ -367,7 +368,10 @@ body {
 }
 
 @media (min-width: 768px) {
-  .menu-panel,
+  .menu-panel {
+    max-width: 400px;
+  }
+
   .settings-panel {
     max-width: 400px;
   }
@@ -378,7 +382,10 @@ body {
 
 /* Desktop Styles */
 @media (min-width: 1280px) {
-  .menu-panel,
+  .menu-panel {
+    max-width: 500px;
+  }
+
   .settings-panel {
     max-width: 300px;
   }
@@ -403,7 +410,7 @@ body {
 
   .vocab-main,
   .footer-bar {
-    margin-left: 300px;
+    margin-left: 500px;
     margin-right: 300px;
   }
 }
@@ -424,12 +431,12 @@ body {
   }
 }
 
-.vocab-word .word-text {
-  font-size: clamp(32px, 6vw, 54px);
+.word-text {
+  font-size: clamp(28px, 4.2vw, 40px);
 }
 
 .vocab-meaning {
-  font-size: clamp(24px, 3.6vw, 36px);
+  font-size: clamp(20px, 3.2vw, 32px);
 }
 
 .vocab-type span {
@@ -438,7 +445,7 @@ body {
 
 .example,
 .example-translation {
-  font-size: clamp(20px, 2.2vw, 24px);
+  font-size: clamp(16px, 2vw, 22px);
 }
 
 .footer-next {
