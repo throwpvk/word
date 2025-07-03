@@ -93,7 +93,7 @@ themeDropdown.querySelectorAll("div").forEach((option) => {
     const root = document.documentElement;
 
     if (theme === "dark") {
-      root.style.setProperty("--color-bg", "#3c3d37");
+      root.style.setProperty("--color-bg", "#292929"); // #3c3d37
       root.style.setProperty("--color-bg-panel", "#1e201e");
       root.style.setProperty("--color-text", "#ecdfcc");
       iconToggle.classList.replace("fa-sun", "fa-moon");
