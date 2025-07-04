@@ -147,6 +147,9 @@ document.querySelectorAll(".lesson-menu > li.level-item").forEach((item) => {
 
       // Toggle chính item được click
       item.classList.toggle("active");
+      if (item.classList.contains("active")) {
+        item.scrollIntoView({ behavior: "smooth", block: "center" });
+      }
     }
   });
 });
