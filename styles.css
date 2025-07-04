@@ -720,6 +720,7 @@ body {
   word-break: break-word;
   line-height: 1.2;
   font-weight: 600;
+  cursor: pointer;
 }
 
 .choices-area .choice.wrong {
