@@ -264,33 +264,42 @@
       </div> -->
 
       <!-- Kéo thả kiểm tra đánh vần chữ -->
-      <div class="puzzle-quiz">
+      <div class="spellcheck-quiz">
         <div class="question-area">
           <label class="vocab-label">Câu hỏi</label>
           <div class="question-text word-text">Tạm biệt thế giới</div>
         </div>
-        <label class="vocab-label">Kéo để sắp xếp thành từ đúng</label>
-        <div class="puzzle-container">
-          <div class="puzzle-char">D</div>
-          <div class="puzzle-char">O</div>
-          <div class="puzzle-char">⎵</div>
-          <div class="puzzle-char">O</div>
-          <div class="puzzle-char">G</div>
-          <div class="puzzle-char">L</div>
-          <div class="puzzle-char">R</div>
-          <div class="puzzle-char">Y</div>
-          <div class="puzzle-char">W</div>
-          <div class="puzzle-char">B</div>
-          <div class="puzzle-char">E</div>
-          <div class="puzzle-char">O</div>
-          <div class="puzzle-char">D</div>
+        <label class="vocab-label">Đáp án</label>
+        <div class="answer-area">
+          <div
+            class="answer-text"
+            data-vocab="Goodbye world"
+            placeholder="Nhập từ đúng"
+            contenteditable="false"
+          ></div>
+          <button class="input-del-btn" title="backspace">
+            <i class="fa-solid fa-delete-left"></i>
+          </button>
+        </div>
+        <label class="vocab-label">Gõ để nhập thành từ đúng</label>
+        <div class="spellcheck-container">
+          <div class="spellcheck-char">D</div>
+          <div class="spellcheck-char">O</div>
+          <div class="spellcheck-char">⎵</div>
+          <div class="spellcheck-char">G</div>
+          <div class="spellcheck-char">L</div>
+          <div class="spellcheck-char">R</div>
+          <div class="spellcheck-char">Y</div>
+          <div class="spellcheck-char">W</div>
+          <div class="spellcheck-char">B</div>
+          <div class="spellcheck-char">E</div>
         </div>
 
-        <div class="puzzle-button">
-          <button class="puzzle-check-btn" title="Kiểm tra">
+        <div class="spellcheck-button">
+          <button class="spellcheck-check-btn" title="Kiểm tra">
             <i class="fas fa-check-circle"></i> Kiểm tra
           </button>
-          <button class="puzzle-hint-btn" title="Gợi ý">
+          <button class="spellcheck-hint-btn" title="Gợi ý">
             <i class="fas fa-lightbulb"></i> Gợi ý
           </button>
         </div>
