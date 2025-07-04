@@ -50,7 +50,7 @@ body {
   align-items: center;
   justify-content: space-between;
   padding: 0 16px;
-  /* border-bottom: 6px var(--color-correct-content) solid; */
+  z-index: 8500;
 }
 
 .header-bar h1 {
@@ -103,7 +103,7 @@ body {
   transform: translateX(-100%);
   transition: all 0.5s ease;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  z-index: 2001;
+  z-index: 9001;
 }
 
 .lesson-menu {
@@ -200,7 +200,7 @@ body {
 .settings-panel {
   right: 0;
   transform: translateX(100%);
-  z-index: 2002;
+  z-index: 9002;
 }
 
 .menu-panel h2,
@@ -259,7 +259,7 @@ body {
   color: var(--color-text);
   margin-bottom: 16px;
   padding-bottom: 20px;
-  border-bottom: 2px var(--color-secondary) solid;
+  border-bottom: 3px var(--color-correct) solid;
 }
 
 .vocab-type {
@@ -332,7 +332,7 @@ body {
   align-items: center;
   justify-content: center;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  z-index: 1000;
+  z-index: 8000;
   transform: translateY(100%);
   transition: all 0.5s ease;
 }
@@ -686,9 +686,8 @@ body {
 /* Danh cho màn hình quiz */
 /* Trắc nghiệm */
 .question-area {
-  margin-bottom: 16px;
-  height: 100px;
-  border-bottom: 2px var(--color-secondary) solid;
+  margin-bottom: 5px;
+  height: 80px;
 }
 .question-text {
   margin: 0px;
@@ -703,27 +702,32 @@ body {
 .choices-area .choice {
   width: 100%;
   border: 0;
-  margin: 10px;
+  margin: 5px;
   background-color: var(--color-bg-panel);
-  border: 2px black solid;
-  border-radius: 999px;
+  border: 2px var(--color-secondary) solid;
+  border-radius: 16px;
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0px;
-  height: 60px;
+  padding: 8px 10px;
+  /* height: 55px; */
   max-width: 700px;
   font-size: clamp(18px, 2.2vw, 24px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  white-space: normal;
+  word-break: break-word;
 }
 
 .choices-area .choice.wrong {
   background-color: var(--color-wrong);
   border: 2px var(--color-wrong-content) solid;
+  color: #403d39;
 }
 
 .choices-area .choice.correct {
   background-color: var(--color-correct);
   border: 2px var(--color-correct-content) solid;
+  color: #403d39;
 }
 
 .choices-area .choice:hover {
@@ -735,9 +739,10 @@ body {
 }
 
 .question-audio-btn {
-  width: 70px;
-  height: 70px;
-  padding: 18px;
+  width: 60px;
+  height: 60px;
+  padding: 15px;
   margin: 0 auto;
   border-radius: 999px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
