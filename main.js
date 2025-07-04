@@ -9,8 +9,8 @@ const footerBar = document.querySelector(".footer-bar");
 const footerStatus = document.querySelector(".footer-status");
 const vocabMain = document.querySelector(".vocab-main");
 
-const vocabWord = document.querySelector(".vocab-word");
-const vocabMeaning = document.querySelector(".vocab-meaning");
+const vocabLabel = document.querySelector(".vocab-label");
+const progressBar = document.querySelector(".progress-bar");
 const vocabExample = document.querySelector(".example");
 const h1 = document.querySelector("h1");
 
@@ -65,10 +65,10 @@ function hideFooter() {
   vocabMain.style.paddingBottom = "0";
 }
 
-vocabWord?.addEventListener("pointerup", () =>
+vocabLabel?.addEventListener("pointerup", () =>
   showFooter("correct", "Chính xác. Tuyệt vời!")
 );
-vocabMeaning?.addEventListener("pointerup", () =>
+progressBar?.addEventListener("pointerup", () =>
   showFooter("wrong", "Sai mất rồi. Cố gắng chút nữa!")
 );
 vocabExample?.addEventListener("pointerup", () => showFooter("", ""));
