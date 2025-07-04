@@ -36,6 +36,7 @@ body {
   overflow-x: hidden;
   text-align: justify;
   background-color: var(--color-bg);
+  user-select: none;
 }
 
 /* Header */
@@ -750,4 +751,85 @@ body {
   margin: 0 auto;
   border-radius: 999px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+}
+
+.puzzle-quiz {
+  width: 100%;
+  padding: 16px;
+}
+
+.puzzle-container {
+  margin: 10px 0 16px;
+  width: 100%;
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 20px 15px;
+  border: 2px var(--color-correct) dashed;
+  border-radius: 16px;
+}
+.puzzle-container .puzzle-char {
+  width: calc((100% - 40px) / 5);
+  max-width: 80px;
+  min-width: 40px;
+  aspect-ratio: 1 / 1;
+  font-weight: bold;
+  background-color: var(--color-bg-panel);
+  border: 2px var(--color-default) solid;
+  border-radius: 16px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 20px;
+  transition: all 0.5s ease;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08);
+  cursor: grab;
+}
+
+.puzzle-container .puzzle-char:hover {
+  border: 2px var(--color-correct-content) solid;
+}
+
+.puzzle-container .puzzle-char:active {
+  border: 2px var(--color-correct-content) solid;
+  background-color: var(--color-correct);
+  cursor: grabbing;
+}
+
+.puzzle-button {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+
+.puzzle-check-btn,
+.puzzle-hint-btn {
+  border-radius: 16px;
+  font-size: 16px;
+  padding: 12px 16px;
+  border: 2px black solid;
+  transition: all 0.5s ease;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  cursor: pointer;
+}
+
+.puzzle-check-btn {
+  background-color: var(--color-correct);
+}
+.puzzle-hint-btn {
+  background-color: var(--color-default);
+}
+
+.puzzle-check-btn:hover,
+.puzzle-hint-btn:hover {
+  opacity: 0.5;
+}
+
+.puzzle-check-btn:active,
+.puzzle-hint-btn:active {
+  opacity: 0.8;
 }
