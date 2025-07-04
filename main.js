@@ -17,8 +17,8 @@ const h1 = document.querySelector("h1");
 // ===================== MENU TOGGLE =====================
 menuBtn?.addEventListener("pointerup", () => {
   const isShown = menuPanel.classList.toggle("show");
-  menuPanel.style.zIndex = "2010";
-  settingsPanel.style.zIndex = "2009";
+  menuPanel.style.zIndex = "9010";
+  settingsPanel.style.zIndex = "9009";
   menuBtn.innerHTML = isShown
     ? `<i class="fa-solid fa-xmark"></i>`
     : `<i class="fas fa-bars"></i>`;
@@ -27,8 +27,8 @@ menuBtn?.addEventListener("pointerup", () => {
 // ===================== SETTINGS TOGGLE =====================
 settingsBtn?.addEventListener("pointerup", () => {
   const isShown = settingsPanel.classList.toggle("show");
-  menuPanel.style.zIndex = "2009";
-  settingsPanel.style.zIndex = "2010";
+  menuPanel.style.zIndex = "9009";
+  settingsPanel.style.zIndex = "9010";
   settingsBtn.innerHTML = isShown
     ? `<i class="fa-solid fa-xmark"></i>`
     : `<i class="fas fa-gear"></i>`;
