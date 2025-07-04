@@ -18,7 +18,7 @@
   --color-wrong: #feb2b2;
   --color-wrong-content: #c73c3c;
   --color-default: #ffca58;
-  --color-default-content: #ffa400;
+  --color-default-content: #f0ad4e;
 }
 
 * {
@@ -48,9 +48,9 @@ body {
   height: 70px;
   background: var(--color-bg-panel);
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
-  padding: 0 16px;
+  padding: 13px 16px;
   z-index: 8500;
 }
 
@@ -106,16 +106,16 @@ body {
   z-index: 9001;
 }
 .settings-panel {
-  padding: 0px 22px 10px;
+  padding: 22px;
 }
 .lesson-menu {
   width: 100%;
-  height: 80vh;
+  height: 90vh;
   overflow-y: auto;
   padding-bottom: 10vh;
   scrollbar-width: thin;
   scrollbar-color: var(--color-correct) transparent;
-  padding: 0 22px 10vh;
+  padding: 16px 22px 10vh;
 }
 
 .lesson-menu .level-item {
@@ -186,18 +186,20 @@ body {
 
 .menu-panel.show .menu-btn {
   transform: translateX(0) translateY(calc(-100% - 6px));
-  border-radius: 40%;
+  border-radius: 0;
   width: 100%;
   justify-content: flex-start;
   padding: 20px;
+  box-shadow: 4px 0 12px rgba(0, 0, 0, 0.08);
 }
 
 .settings-panel.show .settings-btn {
   transform: translateX(0) translateY(calc(-100% - 6px));
-  border-radius: 40%;
+  border-radius: 0;
   width: 100%;
   justify-content: flex-end;
   padding: 20px;
+  box-shadow: -4px 0 12px rgba(0, 0, 0, 0.08);
 }
 
 .settings-panel {
@@ -211,9 +213,18 @@ body {
   font-size: 20px;
   font-weight: 600;
   color: var(--color-text);
-  /* margin-bottom: 16px; */
   text-align: left;
   padding: 10px 22px;
+  width: 60%;
+  height: 70px;
+  position: absolute;
+  top: -3px;
+  left: 50%;
+  transform: translateX(-50%) translateY(-100%);
+  pointer-events: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .menu-panel nav ul {
@@ -338,7 +349,6 @@ body {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   z-index: 8000;
   transform: translateY(100%);
-  transition: all 0.5s ease;
 }
 
 .footer-bar.show {
@@ -348,6 +358,7 @@ body {
   background-color: var(--color-default);
   visibility: visible;
   opacity: 1;
+  transition: all 0.5s ease;
 }
 
 .footer-bar.correct {
@@ -412,7 +423,7 @@ body {
   background: var(--color-default-content);
   color: var(--color-text-light);
   border: none;
-  padding: 20px 100px;
+  padding: 20px 115px 20px 100px;
   border-radius: 16px;
   font-size: 18px;
   font-weight: 600;
@@ -784,28 +795,28 @@ body {
   border: 2px var(--color-wrong-content) solid;
   background-color: var(--color-wrong);
   border-radius: 12px;
-  font-size: 18px;
+  font-size: 22px;
   color: #403d39;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-right: 0.2rem;
 }
 
 .spellcheck-container {
-  margin: 0px auto 16px;
-  width: 100%;
-  display: flex;
-  justify-content: flex-start;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
   gap: 8px;
-  align-items: center;
-  flex-wrap: wrap;
   padding: 20px 15px;
   border: 2px var(--color-correct) dashed;
   border-radius: 16px;
+  width: 100%;
+  margin: 0 auto 16px;
 }
 
 .spellcheck-container .spellcheck-char {
-  width: calc((100% - 48px) / 6);
-  max-width: 60px;
-  min-width: 40px;
-  aspect-ratio: 1 / 1;
+  position: relative;
+  user-select: none;
   font-weight: bold;
   background-color: var(--color-bg-panel);
   border: 2px var(--color-secondary) solid;
@@ -817,6 +828,33 @@ body {
   transition: all 0.5s ease;
   box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08);
   cursor: pointer;
+}
+
+.spellcheck-char::after {
+  content: attr(data-char);
+  position: absolute;
+  top: -52px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--color-bg-panel);
+  border-radius: 12px;
+  width: 80px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  font-size: 28px;
+  font-weight: bold;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  z-index: 10;
+}
+
+.spellcheck-char:active::after {
+  opacity: 1;
+  visibility: visible;
 }
 
 .spellcheck-container .spellcheck-char:hover {
