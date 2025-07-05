@@ -14,7 +14,7 @@
   --color-text-light: white;
   --color-secondary: #888888;
   --color-correct: #9ae6b4;
-  --color-correct-content: #2f855a;
+  --color-correct-content: #29bd73;
   --color-wrong: #feb2b2;
   --color-wrong-content: #c73c3c;
   --color-default: #ffca58;
@@ -37,6 +37,7 @@ body {
   text-align: justify;
   background-color: var(--color-bg);
   user-select: none;
+  font-weight: 500;
 }
 
 /* Header */
@@ -338,6 +339,10 @@ body {
   border: 2px black solid;
 }
 
+svg path {
+  fill: #403d39;
+}
+
 /* Footer Panel */
 .footer-bar {
   position: fixed;
@@ -373,15 +378,15 @@ body {
 }
 
 .footer-bar.show .footer-next {
-  color: var(--color-text-light);
+  /* color: var(--color-text-light); */
 }
 
 .footer-bar.correct .footer-next {
-  color: var(--color-text-light);
+  /* color: var(--color-text-light); */
 }
 
 .footer-bar.wrong .footer-next {
-  color: var(--color-text-light);
+  /* color: var(--color-text-light); */
 }
 
 .footer-button-container {
@@ -424,7 +429,7 @@ body {
 
 .footer-next {
   background: var(--color-default-content);
-  color: var(--color-text-light);
+  color: #403d39;
   border: none;
   padding: 20px 115px 20px 100px;
   border-radius: 16px;
@@ -433,6 +438,8 @@ body {
   cursor: pointer;
   transition: all 0.5s ease;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border: 2px black solid;
 }
 
 @media (min-width: 768px) {
@@ -685,7 +692,6 @@ body {
 
 .lesson-menu .sub-menu li {
   padding: 10px 12px;
-  font-weight: normal;
   font-size: 16px;
   color: var(--color-text);
   cursor: pointer;
