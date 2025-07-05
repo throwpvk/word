@@ -1,191 +1,24 @@
-<!DOCTYPE html>
-<html lang="vi">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Học Từ Vựng</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
-      integrity="sha512-Evv84Mr4kqVGRNSgIGL/F/aIDqQb7xQ2vcrdIwxfjThSH8CSR7PBEakCr51Ck+w+/U6swU2Im1vVX0SVk9ABhg=="
-      crossorigin="anonymous"
-      referrerpolicy="no-referrer"
-    />
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <!-- Header -->
-    <header class="header-bar">
-      <h1>Học Từ Vựng</h1>
-      <div class="progress-bar" style="--progress: 100%"></div>
-    </header>
+// ===================== DOM ELEMENTS =====================
+const menuBtn = document.querySelector(".menu-btn");
+const settingsBtn = document.querySelector(".settings-btn");
+const menuPanel = document.querySelector(".menu-panel");
+const settingsPanel = document.querySelector(".settings-panel");
+const headerBar = document.querySelector(".header-bar");
+const footerBar = document.querySelector(".footer-bar");
+const footerStatus = document.querySelector(".footer-status");
+const vocabMain = document.querySelector(".vocab-main");
+const vocabLabel = document.querySelector(".vocab-label");
+const progressBar = document.querySelector(".progress-bar");
+const vocabExample = document.querySelector(".example");
+const h1 = document.querySelector("h1");
+const themeToggle = document.getElementById("themeSelectToggle");
+const themeDropdown = document.getElementById("themeDropdown");
+const iconToggle = themeToggle?.querySelector("i");
 
-    <!-- Menu Panel (Left) -->
-    <aside class="menu-panel">
-      <button class="menu-btn" title="Mở menu">
-        <i class="fas fa-bars"></i>
-      </button>
-      <h2>Danh Sách Bài Học</h2>
-      <nav>
-        <ul class="lesson-menu">
-          <li class="level-item active">
-            Bài 1: Từ vựng cơ bản
-            <ul class="sub-menu">
-              <li class="sub-item">1.1 Giới thiệu</li>
-              <li class="sub-item">1.2 Từ vựng chính</li>
-              <li class="sub-item">1.3 Ví dụ ứng dụng</li>
-            </ul>
-          </li>
-          <li class="level-item">
-            Bài 2: Giao tiếp hàng ngày
-            <ul class="sub-menu">
-              <li class="sub-item">2.1 Mẫu câu cơ bản</li>
-              <li class="sub-item">2.2 Hội thoại</li>
-              <li class="sub-item">2.3 Câu hỏi thường gặp</li>
-            </ul>
-          </li>
-          <li class="level-item">
-            Bài 3: Từ vựng nâng cao
-            <ul class="sub-menu">
-              <li class="sub-item">3.1 Từ chuyên sâu</li>
-              <li class="sub-item">3.2 Thành ngữ</li>
-              <li class="sub-item">3.3 Từ khó</li>
-            </ul>
-          </li>
-          <li class="level-item">
-            Bài 4: Từ vựng chuyên ngành
-            <ul class="sub-menu">
-              <li class="sub-item">4.1 Kinh tế</li>
-              <li class="sub-item">4.2 Kỹ thuật</li>
-              <li class="sub-item">4.3 IT & công nghệ</li>
-            </ul>
-          </li>
-          <li class="level-item">
-            Bài 5: Ngữ pháp cơ bản
-            <ul class="sub-menu">
-              <li class="sub-item">5.1 Thì hiện tại</li>
-              <li class="sub-item">5.2 Thì quá khứ</li>
-              <li class="sub-item">5.3 Câu phủ định</li>
-            </ul>
-          </li>
-          <li class="level-item">
-            Bài 6: Ngữ pháp trung cấp
-            <ul class="sub-menu">
-              <li class="sub-item">6.1 Mệnh đề quan hệ</li>
-              <li class="sub-item">6.2 Câu điều kiện</li>
-              <li class="sub-item">6.3 Câu gián tiếp</li>
-            </ul>
-          </li>
-          <li class="level-item">
-            Bài 7: Ngữ pháp nâng cao
-            <ul class="sub-menu">
-              <li class="sub-item">7.1 Đảo ngữ</li>
-              <li class="sub-item">7.2 Câu giả định</li>
-              <li class="sub-item">7.3 Cấu trúc phức tạp</li>
-            </ul>
-          </li>
-          <li class="level-item">
-            Bài 8: Giao tiếp công sở
-            <ul class="sub-menu">
-              <li class="sub-item">8.1 Email</li>
-              <li class="sub-item">8.2 Cuộc họp</li>
-              <li class="sub-item">8.3 Đàm phán</li>
-            </ul>
-          </li>
-          <li class="level-item">
-            Bài 9: Giao tiếp đời sống
-            <ul class="sub-menu">
-              <li class="sub-item">9.1 Mua sắm</li>
-              <li class="sub-item">9.2 Nhà hàng</li>
-              <li class="sub-item">9.3 Giao thông</li>
-            </ul>
-          </li>
-          <li class="level-item">
-            Bài 1: Từ vựng cơ bản
-            <ul class="sub-menu">
-              <li class="sub-item">1.1 Giới thiệu</li>
-              <li class="sub-item">1.2 Từ vựng chính</li>
-              <li class="sub-item">1.3 Ví dụ ứng dụng</li>
-            </ul>
-          </li>
-          <li class="level-item">
-            Bài 2: Giao tiếp hàng ngày
-            <ul class="sub-menu">
-              <li class="sub-item">2.1 Mẫu câu cơ bản</li>
-              <li class="sub-item">2.2 Hội thoại</li>
-              <li class="sub-item">2.3 Câu hỏi thường gặp</li>
-            </ul>
-          </li>
-          <li class="level-item">
-            Bài 3: Từ vựng nâng cao
-            <ul class="sub-menu">
-              <li class="sub-item">3.1 Từ chuyên sâu</li>
-              <li class="sub-item">3.2 Thành ngữ</li>
-              <li class="sub-item">3.3 Từ khó</li>
-            </ul>
-          </li>
-          <li class="level-item">
-            Bài 4: Từ vựng chuyên ngành
-            <ul class="sub-menu">
-              <li class="sub-item">4.1 Kinh tế</li>
-              <li class="sub-item">4.2 Kỹ thuật</li>
-              <li class="sub-item">4.3 IT & công nghệ</li>
-            </ul>
-          </li>
-          <li class="level-item">
-            Bài 5: Ngữ pháp cơ bản
-            <ul class="sub-menu">
-              <li class="sub-item">5.1 Thì hiện tại</li>
-              <li class="sub-item">5.2 Thì quá khứ</li>
-              <li class="sub-item">5.3 Câu phủ định</li>
-            </ul>
-          </li>
-          <li class="level-item">
-            Bài 6: Ngữ pháp trung cấp
-            <ul class="sub-menu">
-              <li class="sub-item">6.1 Mệnh đề quan hệ</li>
-              <li class="sub-item">6.2 Câu điều kiện</li>
-              <li class="sub-item">6.3 Câu gián tiếp</li>
-            </ul>
-          </li>
-          <li class="level-item">
-            Bài 7: Ngữ pháp nâng cao
-            <ul class="sub-menu">
-              <li class="sub-item">7.1 Đảo ngữ</li>
-              <li class="sub-item">7.2 Câu giả định</li>
-              <li class="sub-item">7.3 Cấu trúc phức tạp</li>
-            </ul>
-          </li>
-          <li class="level-item">
-            Bài 8: Giao tiếp công sở
-            <ul class="sub-menu">
-              <li class="sub-item">8.1 Email</li>
-              <li class="sub-item">8.2 Cuộc họp</li>
-              <li class="sub-item">8.3 Đàm phán</li>
-            </ul>
-          </li>
-          <li class="level-item">
-            Bài 9: Giao tiếp đời sống
-            <ul class="sub-menu">
-              <li class="sub-item">9.1 Mua sắm</li>
-              <li class="sub-item">9.2 Nhà hàng</li>
-              <li class="sub-item">9.3 Giao thông</li>
-            </ul>
-          </li>
-        </ul>
-      </nav>
-    </aside>
-
-    <!-- Main Content -->
-    <main class="vocab-main">
-      <!-- Thẻ giới thiệu -->
-      <!-- <div class="vocab-card intro">
+// ===================== QUIZ HTML =====================
+const html = [
+  `
+      <div class="vocab-card intro">
         <label class="vocab-label">Từ vựng</label>
         <h2 class="word-text">Beautiful</h2>
         <label class="vocab-label">Tiếng Việt</label>
@@ -215,10 +48,10 @@
           <p class="example">The sunset is beautiful today.</p>
           <p class="example-translation">Hoàng hôn hôm nay thật đẹp.</p>
         </div>
-      </div> -->
-
-      <!-- Câu hỏi trắc nghiệm - text or audio -->
-      <!-- <div class="vocab-card multiple-choice-quiz">
+      </div>
+  `,
+  `
+      <div class="vocab-card multiple-choice-quiz">
         <div class="question-area">
           <label class="vocab-label">Câu hỏi</label>
           <div class="question-text word-text">Beautiful</div>
@@ -231,10 +64,10 @@
           <d class="choice">Cao</d>
           <d class="choice">Bẩn</d>
         </div>
-      </div> -->
-
-      <!-- Câu hỏi trắc nghiệm - audio -->
-      <!-- <div class="vocab-card multiple-choice-quiz">
+      </div>
+  `,
+  `
+      <div class="vocab-card multiple-choice-quiz">
         <div class="question-area">
           <label class="vocab-label">Nhấn để nghe</label>
           <button class="question-audio-btn audio-btn" title="Phát âm">
@@ -261,9 +94,9 @@
           <d class="choice">Cao</d>
           <d class="choice">Bẩn</d>
         </div>
-      </div> -->
-
-      <!-- Kéo thả kiểm tra đánh vần chữ -->
+      </div>
+  `,
+  `
       <div class="spellcheck-quiz">
         <div class="question-area">
           <label class="vocab-label">Câu hỏi</label>
@@ -304,42 +137,150 @@
           </button>
         </div>
       </div>
-    </main>
+  `,
+];
+let htmlIndex = 0;
+let count = 0;
 
-    <!-- Settings Panel (Right) -->
-    <aside class="settings-panel">
-      <button class="settings-btn" title="Cài đặt">
-        <i class="fas fa-gear"></i>
-      </button>
-      <h2>Cài Đặt</h2>
-      <div class="setting-group">
-        <div class="setting-item" id="themeSelectToggle">
-          <span class="label">Chế độ hiển thị</span>
-          <i class="fas fa-sun"></i>
-        </div>
+// ===================== EVENT LISTENERS =====================
+function initEvents() {
+  h1?.addEventListener("pointerup", () => {
+    const status = count % 3;
+    if (status === 0) showFooter("correct", "Chính xác. Tuyệt vời!");
+    else if (status === 1)
+      showFooter("wrong", "Sai mất rồi. Cố gắng chút nữa!");
+    else showFooter("", "");
+    count++;
+  });
 
-        <div class="setting-dropdown" id="themeDropdown">
-          <div data-theme="light">
-            Sáng<i class="fa-solid fa-sun light-mode-selector"></i>
-          </div>
-          <div data-theme="dark">
-            Tối<i class="fas fa-moon dark-mode-selector"></i>
-          </div>
-        </div>
-      </div>
-    </aside>
+  document.querySelector(".footer-next")?.addEventListener("pointerup", () => {
+    vocabMain.innerHTML = html[htmlIndex];
+    htmlIndex = (htmlIndex + 1) % html.length;
+    hideFooter();
+  });
 
-    <!-- Footer Panel -->
-    <footer class="footer-bar">
-      <div class="footer-button-container">
-        <div class="footer-status">Chính xác!</div>
-        <button class="footer-next">
-          <i class="fa-solid fa-angle-right" style="margin-right: 5px"></i>
-          Tiếp
-        </button>
-      </div>
-    </footer>
+  menuBtn?.addEventListener("pointerup", () =>
+    togglePanel(menuPanel, settingsPanel, menuBtn, "fa-bars")
+  );
+  settingsBtn?.addEventListener("pointerup", () =>
+    togglePanel(settingsPanel, menuPanel, settingsBtn, "fa-gear")
+  );
 
-    <script src="./js/controller.js"></script>
-  </body>
-</html>
+  vocabMain?.addEventListener("pointerup", hidePanel);
+  headerBar?.addEventListener("pointerup", hidePanel);
+  vocabLabel?.addEventListener("pointerup", () =>
+    showFooter("correct", "Chính xác. Tuyệt vời!")
+  );
+  progressBar?.addEventListener("pointerup", () =>
+    showFooter("wrong", "Sai mất rồi. Cố gắng chút nữa!")
+  );
+  vocabExample?.addEventListener("pointerup", () => showFooter("", ""));
+  themeToggle?.addEventListener("pointerup", toggleThemeDropdown);
+
+  document.addEventListener("pointerup", (e) => {
+    if (!themeToggle.contains(e.target) && !themeDropdown.contains(e.target)) {
+      themeDropdown.style.display = "none";
+    }
+  });
+
+  themeDropdown.querySelectorAll("div").forEach((option) => {
+    option.addEventListener("pointerup", () =>
+      applyTheme(option.dataset.theme)
+    );
+  });
+
+  document.querySelectorAll(".lesson-menu > li.level-item").forEach((item) => {
+    item.addEventListener("click", (e) => handleLessonClick(e, item));
+  });
+}
+
+// ===================== PANEL TOGGLE =====================
+function togglePanel(showPanel, hidePanel, btn, defaultIcon) {
+  const isShown = showPanel.classList.toggle("show");
+  showPanel.style.zIndex = "9010";
+  hidePanel.style.zIndex = "9009";
+  btn.innerHTML = isShown
+    ? `<i class="fa-solid fa-xmark"></i>`
+    : `<i class="fas ${defaultIcon}"></i>`;
+}
+
+function hidePanel() {
+  menuPanel.classList.remove("show");
+  settingsPanel.classList.remove("show");
+  menuBtn.innerHTML = `<i class="fas fa-bars"></i>`;
+  settingsBtn.innerHTML = `<i class="fas fa-gear"></i>`;
+}
+
+// ===================== FOOTER =====================
+function showFooter(type, text) {
+  footerBar.className = `footer-bar show ${type}`;
+  const iconMap = {
+    correct: `<i class="fa-solid fa-circle-check" style="margin-right:10px"></i>`,
+    wrong: `<i class="fa-solid fa-circle-xmark" style="margin-right:10px"></i>`,
+  };
+  footerStatus.innerHTML = (iconMap[type] || "") + text;
+  setTimeout(() => {
+    vocabMain.style.paddingBottom = `${footerBar.offsetHeight}px`;
+  }, 300);
+}
+
+function hideFooter() {
+  footerBar.className = "footer-bar";
+  footerStatus.innerHTML = "";
+  vocabMain.style.paddingBottom = "0";
+}
+
+// ===================== THEME =====================
+function toggleThemeDropdown() {
+  themeDropdown.style.display =
+    themeDropdown.style.display === "flex" ? "none" : "flex";
+}
+
+function applyTheme(theme) {
+  const themes = {
+    dark: {
+      "--color-bg": "#292929",
+      "--color-bg-panel": "#1e201e",
+      "--color-text": "#ecdfcc",
+      icon: "fa-moon",
+    },
+    light: {
+      "--color-bg": "#fff8e5",
+      "--color-bg-panel": "#fdf3d7",
+      "--color-text": "#403d39",
+      icon: "fa-sun",
+    },
+  };
+  const selected = themes[theme];
+  if (selected) {
+    Object.entries(selected).forEach(([key, value]) => {
+      if (key.startsWith("--")) {
+        document.documentElement.style.setProperty(key, value);
+      }
+    });
+    iconToggle.className = `fa-solid ${selected.icon}`;
+  }
+  themeDropdown.style.display = "none";
+}
+
+// ===================== LESSON MENU =====================
+function handleLessonClick(e, item) {
+  document
+    .querySelectorAll(".sub-item")
+    .forEach((subItem) => subItem.classList.remove("active"));
+
+  if (e.currentTarget !== e.target && e.target.classList.contains("sub-item")) {
+    e.target.classList.add("active");
+  } else {
+    document.querySelectorAll(".lesson-menu > li.level-item").forEach((li) => {
+      if (li !== item) li.classList.remove("active");
+    });
+    item.classList.toggle("active");
+    if (item.classList.contains("active")) {
+      item.scrollIntoView({ behavior: "smooth", block: "center" });
+    }
+  }
+}
+
+// ===================== INIT =====================
+initEvents();

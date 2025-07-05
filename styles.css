@@ -14,7 +14,7 @@
   --color-text-light: white;
   --color-secondary: #888888;
   --color-correct: #9ae6b4;
-  --color-correct-content: #29bd73;
+  --color-correct-content: #43c282;
   --color-wrong: #feb2b2;
   --color-wrong-content: #c73c3c;
   --color-default: #ffca58;
@@ -375,18 +375,6 @@ svg path {
 
 .footer-bar.wrong {
   background: var(--color-wrong);
-}
-
-.footer-bar.show .footer-next {
-  /* color: var(--color-text-light); */
-}
-
-.footer-bar.correct .footer-next {
-  /* color: var(--color-text-light); */
-}
-
-.footer-bar.wrong .footer-next {
-  /* color: var(--color-text-light); */
 }
 
 .footer-button-container {
