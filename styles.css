@@ -115,7 +115,7 @@ body {
   padding-bottom: 10vh;
   scrollbar-width: thin;
   scrollbar-color: var(--color-correct) transparent;
-  padding: 16px 22px 10vh;
+  padding: 16px 22px 50vh;
 }
 
 .lesson-menu .level-item {
@@ -286,6 +286,9 @@ body {
   border-radius: 20px;
   width: 80px;
   height: 40px;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border: 2px black solid;
 }
 
 .vocab-example {
@@ -299,6 +302,7 @@ body {
   align-items: center;
   gap: 10px;
   margin-bottom: 10px;
+  font-weight: 600;
 }
 
 .example-translation {
@@ -308,6 +312,7 @@ body {
   gap: 10px;
   margin-bottom: 10px;
   font-style: italic;
+  font-weight: 500;
 }
 
 .vocab-sub-item {
@@ -329,10 +334,8 @@ body {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  /* position: absolute;
-  top: 0;
-  right: 0;
-  transform: translateY(-100%) translateX(50%); */
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  border: 2px black solid;
 }
 
 /* Footer Panel */
