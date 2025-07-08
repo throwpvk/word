@@ -241,8 +241,8 @@ themeDropdown.querySelectorAll("div").forEach((option) => {
 
     const themes = {
       dark: {
-        "--color-bg": "#292929",
-        "--color-bg-panel": "#1e201e",
+        "--color-bg": "#303030",
+        "--color-bg-panel": "#212121",
         "--color-text": "#ecdfcc",
         icon: "fa-moon",
       },
