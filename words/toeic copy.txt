@@ -1,0 +1,10 @@
+new new	mới
+company	công ty
+year	năm
+service	dịch vụ
+please	vui lòng
+customer	khách hàng
+work	làm việc / công việc
+email	thư điện tử
+make	làm
+more	thêm / nhiều hơn

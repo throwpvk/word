@@ -1,0 +1,100 @@
+small	nhỏ
+magazine	tạp chí
+art	nghệ thuật
+address	địa chỉ
+sell	bán
+consider	xem xét
+meet	gặp
+water	nước
+world	thế giới
+apply	nộp đơn xin
+equipment	thiết bị
+trip	chuyến đi
+account	tài khoản
+great	tuyệt vời / rất lớn
+opportunity	cơ hội
+guest	khách
+meaning	ý nghĩa
+note	chú ý / ghi chú
+photograph	bức ảnh
+skill	kỹ năng
+benefit	lợi ích / có lợi
+rent	thuê
+flight	chuyến bay
+president	chủ tịch
+airport	sân bay
+accept	chấp nhận
+january	tháng Một
+improve	cải thiện
+february	tháng Hai
+allow	cho phép
+support	hỗ trợ / ủng hộ
+bring	mang
+friday	thứ Sáu
+become	trở nên
+policy	chính sách
+convenient	tiện lợi
+museum	bảo tàng
+december	tháng Mười Hai
+tour	chuyến tham quan / du lịch
+sure	chắc chắn / đảm bảo
+choose	chọn
+environment	môi trường
+win	chiến thắng
+november	tháng Mười Một
+clean	sạch / làm sạch
+buy	mua
+between	giữa
+park	công viên
+bank	ngân hàng
+different	khác
+look forward	trông đợi
+space	không gian / chỗ
+build	xây dựng
+in order to	để (làm gì đó)
+electronic	điện tử
+saturday	thứ Bảy
+country	đất nước
+personal	cá nhân
+reduce	giảm
+money	tiền
+create	tạo ra
+final	cuối cùng
+introduce	giới thiệu
+percent	phần trăm
+expand	mở rộng
+worker	công nhân / nhân viên
+future	tương lai
+again	một lần nữa / lại
+serve	phục vụ
+move	di chuyển / di dời
+TRUE	đúng / thật sự
+family	gia đình
+past	qua / quá khứ
+professional	chuyên nghiệp / người chuyên nghiệp
+low	thấp
+parking	đỗ xe
+show	cho thấy
+early	sớm
+enjoy	tận hưởng / thích
+print	in
+although	mặc dù
+today	hôm nay
+seminar	hội thảo
+document	tài liệu
+regular	thường xuyên / thường
+place	nơi / chỗ
+safe	an toàn
+soon	sớm
+children	trẻ em
+back	lại / trở lại
+school	trường học
+think	nghĩ
+invest	đầu tư
+limit	giới hạn
+house	nhà
+over	hơn
+care	chăm sóc / quan tâm
+minute	phút
+keep	giữ
+sales	doanh thu

@@ -1,0 +1,100 @@
+edition	phiên bản
+heat	sửi nóng / sức nóng
+steel	thép
+treatment	việc chăm sóc / điều trị
+foundation	tổ chức
+relevant	thích hợp / liên quan
+faculty	ban giảng viên
+form	dạng / loại
+interior	nội thất
+county	quận
+citizen	công dân
+gain	có được
+glass	kính / thủy tinh
+live	trực tiếp
+cover	nói đến / bao gồm
+existing	hiện tại
+vendor	người bán
+renowned	nổi tiếng
+discover	phát hiện / khám phá
+reach	liên lạc
+whole	toàn bộ
+salt	muối
+academic	học thuật
+thanks to	nhờ vào
+wireless	không dây
+basis	cơ sở
+appeal	hấp dẫn
+uk	Anh Quốc
+tip	mẹo
+database	cơ sở dữ liệu
+lounge	phòng thư giãn
+accessory	phụ kiện
+complex	tổ hợp
+trade	thương mại
+director	đạo diễn
+labor	nhân công / lao động
+questionnaire	bảng câu hỏi
+terminal	nhà ga
+neighborhood	khu vực
+permanent	lâu dài / cố định
+respect	tôn trọng
+aid	hỗ trợ
+scale	quy mô
+lot	bãi / lô đất
+class	hạng / loại
+wonderful	tuyệt vời
+valley	thung lũng
+social	xã hội
+athlete	vận động viên
+africa	châu Phi
+general	tổng
+production	kịch / phim / chương trình
+progress	sự tiến triển
+chain	chuỗi
+landscaping	cảnh quan / thiết kế cảnh quan
+combine	kết hợp
+extension	số máy lẻ
+off	khỏi / ra khỏi
+strict	nghiêm ngặt
+plan	gói (dịch vụ...)
+solar	mặt trời
+inn	khách sạn nhỏ
+costume	trang phục
+attempt	cố gắng / thử
+finalize	hoàn thành
+meter	đồng hồ đo
+volume	khối lượng / số lượng
+worth	giá trị / đáng
+supposed	được dự định
+fit	phù hợp với
+enterprise	doanh nghiệp
+novel	tiểu thuyết
+premium	cao cấp
+memorandum	thông báo
+domestic	trong nước
+clerk	nhân viên
+institution	tổ chức
+wing	cánh
+thus	vì vậy
+personally	đích thân / bản thân
+manner	cách
+residential	nhà ở
+unit	căn hộ
+square	vuông
+statement	bảng sao kê
+concern	liên quan đến
+hand	nộp / đưa
+state-of-the-art	hiện đại
+stay	tiếp tục / luôn luôn
+address	diễn thuyết / nói về
+base	lượng (khách hàng...)
+commission	ủy ban
+surround	bao quanh / xoay quanh
+verify	xác minh
+engine	động cơ
+possibility	khả năng
+panel	tấm
+then	vậy thì
+savings	tiền tiết kiệm
+preview	xem trước

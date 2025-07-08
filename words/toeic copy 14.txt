@@ -1,0 +1,100 @@
+east	phía đông
+recipe	công thức nấu ăn
+chief	tổng / trưởng
+matter	vấn đề
+network	mạng lưới
+north	phía bắc
+natural	tự nhiên / thiên nhiên
+loan	khoản vay
+commercial	thương mại
+rate	tỉ lệ
+get	đi
+battery	cục pin
+grant	tiền trợ cấp / cấp
+chance	cơ hội
+pass	thẻ
+status	trạng thái
+newsletter	thư tin tức
+society	hiệp hội
+perform	thực hiện
+cover	bao gồm
+west	phía tây
+internship	đợt thực tập
+official	quan chức
+through	đến
+district	khu vực
+via	bằng
+ID	chứng minh thư
+gas	ga / xăng
+digital	kỹ thuật số
+toward	hướng về phía / đối với
+sponsor	nhà tài trợ
+appropriate	phù hợp
+as well	cũng
+side	phía / bên
+track	theo dõi
+entertainment	giải trí
+imply	ngụ ý
+revise	chỉnh sửa
+set	bộ
+qualified	đủ trình độ
+chemical	hóa chất
+those	đó
+plus	cộng thêm
+race	cuộc đua
+label	nhãn / nhãn hiệu
+others	những người/cái khác
+qualification	trình độ / khả năng chuyên môn
+painting	bức tranh / việc vẽ tranh
+contest	cuộc thi
+deal	thỏa thuận / khuyến mãi
+should	nếu (≈if)
+forward	về phía trước / chuyển tiếp
+fuel	nhiên liệu
+administrative	hành chính
+charity	hội từ thiện
+pharmaceutical	dược
+restore	phục hồi
+content	nội dung
+leave	nghỉ phép
+break	thời gian nghỉ
+dedicated	tận tâm
+filter	lọc / đồ lọc
+auto	ô tô
+ad	quảng cáo
+turn	chuyển
+fact	sự thật / sự việc
+admission	việc vào cửa
+proud	tự hào
+in fact	thật vậy / thật ra
+pass	đi qua / vượt qua
+talent	tài năng
+express	tốc hành
+greatly	rất nhiều
+expertise	chuyên môn
+engineering	kỹ thuật
+compensation	tiền đền bù / lương thưởng
+title	tựa đề / tựa sách
+piece	mẩu / mẩu đồ
+tool	công cụ
+rather than	thay vì
+catering	việc cung cấp suất ăn
+convention	hội nghị
+deposit	tiền đặt cọc
+mark	đánh dấu
+mall	trung tâm mua sắm
+loss	sự mất mát / thua lỗ
+certainly	chắc chắn
+reception	buổi đón tiếp / buổi tiệc
+stock	cổ phiếu
+ones	những cái / những người
+automobile	ô tô
+reimburse	hoàn tiền
+numerous	nhiều
+else	khác
+background	nền tảng / lý lịch
+separate	tách rời
+common	thông thường
+primary	chủ yếu / chính
+view	góc nhìn
+formal	trịnh trọng / chính thức
