@@ -42,6 +42,9 @@ const html = [
               ></path>
             </svg>
           </button>
+          <div class="vocab-pronun">
+            <span>/əˈbn̩.dn̩t/</span>
+          </div>
         </div>
         <label class="vocab-label">Ví dụ</label>
         <div class="vocab-example">
@@ -264,23 +267,84 @@ function applyTheme(theme) {
 }
 
 // ===================== LESSON MENU =====================
-function handleLessonClick(e, item) {
-  document
-    .querySelectorAll(".sub-item")
-    .forEach((subItem) => subItem.classList.remove("active"));
+// function handleLessonClick(e, item) {
+//   document
+//     .querySelectorAll(".sub-item")
+//     .forEach((subItem) => subItem.classList.remove("active"));
 
-  if (e.currentTarget !== e.target && e.target.classList.contains("sub-item")) {
-    e.target.classList.add("active");
-  } else {
-    document.querySelectorAll(".lesson-menu > li.level-item").forEach((li) => {
-      if (li !== item) li.classList.remove("active");
-    });
-    item.classList.toggle("active");
-    if (item.classList.contains("active")) {
-      item.scrollIntoView({ behavior: "smooth", block: "center" });
-    }
+//   if (e.currentTarget !== e.target && e.target.classList.contains("sub-item")) {
+//     e.target.classList.add("active");
+//   } else {
+//     document.querySelectorAll(".lesson-menu > li.level-item").forEach((li) => {
+//       if (li !== item) li.classList.remove("active");
+//     });
+//     item.classList.toggle("active");
+//     if (item.classList.contains("active")) {
+//       item.scrollIntoView({ behavior: "smooth", block: "center" });
+//     }
+//   }
+// }
+
+const grid = document.getElementById("lessonGrid");
+
+async function loadLessonData(i) {
+  const lessonIndex = i - 1;
+  let words = [];
+  try {
+    const res = await fetch("./words/toeicWords.json");
+    words = await res.json();
+  } catch (e) {
+    alert("Không thể tải dữ liệu từ vựng!");
+    return;
   }
+
+  const start = lessonIndex * 30;
+  const end = start + 30;
+  const lessonWords = words.slice(start, end);
+
+  const learnedCount = lessonWords.filter((w) => w.learned).length;
+  const percent =
+    lessonWords.length > 0
+      ? Math.round((learnedCount / lessonWords.length) * 100)
+      : 0;
+
+  let tableRows = lessonWords
+    .map((w) => `<tr><td>${w.word}</td><td>${w.meaning}</td></tr>`)
+    .join("");
+
+  document.querySelector(".vocab-main").innerHTML = `
+    <div class="lesson-header">
+      <div class="lesson-title">Bài <span class="lesson-number">${i}</span></div>
+      <div class="lesson-progress-bar">
+        <div class="progress-label">Đã học: ${percent}%</div>
+        <div class="progress-outer"><div class="progress-inner" style="width:${percent}%"></div></div>
+      </div>
+      <div class="lesson-actions">
+        <button class="lesson-btn review-btn">Ôn tập</button>
+        <button class="lesson-btn new-btn">Học mới</button>
+        <button class="lesson-btn skip-btn">Bỏ qua</button>
+      </div>
+    </div>
+    <table class="lesson-table">
+      <thead><tr><th>Từ vựng</th><th>Ý nghĩa</th></tr></thead>
+      <tbody>${tableRows}</tbody>
+    </table>
+  `;
+
+  hidePanel();
+}
+
+for (let i = 1; i <= 60; i++) {
+  const btn = document.createElement("button");
+  btn.className = "lesson-circle-btn";
+  btn.dataset.index = i;
+  btn.innerText = i;
+
+  btn.onclick = () => loadLessonData(i);
+
+  grid.appendChild(btn);
 }
 
 // ===================== INIT =====================
 initEvents();
+loadLessonData(1);

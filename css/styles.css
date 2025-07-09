@@ -11,7 +11,7 @@
   --color-text: #ecdfcc; */
 
   /* Phần màu sắc cố định */
-  --color-text-light: white;
+  --color-text-light: #fff8e5;
   --color-secondary: #888888;
 
   --color-correct: #9ae6b4;
@@ -24,7 +24,7 @@
   --color-correct: #a8e6a3; /* xanh lá tươi pastel, mượt mà */
   --color-correct-content: #3dbf6e; /* xanh lá tươi, hơi ngả mint nhẹ */
 
-  --color-wrong: #ffd4d4; /* đỏ pastel nhạt hơn, mềm hơn chút */
+  --color-wrong: #feb2b2; /* đỏ pastel nhạt hơn, mềm hơn chút */
   --color-wrong-content: #e04848; /* đỏ tươi đậm mà không quá gắt */
 
   --color-default: #ffe87c; /* vàng pastel tươi sáng hơn chút */
@@ -122,11 +122,9 @@ body {
 .lesson-menu {
   width: 100%;
   height: 90vh;
-  overflow-y: auto;
-  padding-bottom: 10vh;
   scrollbar-width: thin;
   scrollbar-color: var(--color-correct) transparent;
-  padding: 16px 22px 50vh;
+  /* padding: 16px 22px 50vh; */
 }
 
 .lesson-menu .level-item {
@@ -245,10 +243,11 @@ body {
 /* Main Content */
 .vocab-main {
   margin: 70px auto 0;
-  padding: 0;
+  padding: 20px;
   max-width: 100%;
   z-index: 100;
   display: flex;
+  flex-direction: column;
   justify-content: flex-start;
   min-height: calc(100vh - 70px);
   overflow: hidden;
@@ -257,7 +256,7 @@ body {
 
 .vocab-card {
   background: var(--color-bg);
-  padding: 16px;
+  /* padding: 16px; */
   text-align: left;
   transition: all 0.5s ease;
   max-width: 100%;
@@ -294,10 +293,11 @@ body {
   justify-content: center;
   background: var(--color-correct);
   color: #403d39;
-  border-radius: 20px;
-  width: 80px;
+  border-radius: 12px;
+  /* width: 80px; */
   height: 40px;
-  font-weight: 600;
+  font-weight: 500;
+  padding: 0 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   border: 2px var(--color-correct-content) solid;
   cursor: pointer;
@@ -310,6 +310,20 @@ body {
 
 .vocab-type:active {
   opacity: 0.8;
+}
+
+.vocab-pronun {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-wrong);
+  color: #403d39;
+  border-radius: 12px;
+  height: 40px;
+  padding: 0 15px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.5s ease;
 }
 
 .vocab-example {
@@ -339,7 +353,7 @@ body {
 .vocab-sub-item {
   display: flex;
   justify-content: flex-start;
-  gap: 20px;
+  gap: 15px;
   align-items: center;
   margin-bottom: 20px;
 }
@@ -347,9 +361,9 @@ body {
 .audio-btn {
   background: var(--color-default);
   border: none;
-  border-radius: 20px;
-  padding: 0px 28px;
-  width: 80px;
+  border-radius: 12px;
+  padding: 0 17px;
+  width: 60px;
   height: 40px;
   display: flex;
   align-items: center;
@@ -774,17 +788,17 @@ svg path {
 }
 
 .question-audio-btn {
-  width: 60px;
-  height: 60px;
-  padding: 15px;
+  width: 80px;
+  height: 50px;
+  padding: 12px 24px;
   margin: 0 auto;
-  border-radius: 999px;
+  border-radius: 16px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .spellcheck-quiz {
   width: 100%;
-  padding: 16px;
+  /* padding: 16px; */
 }
 
 .answer-area {
@@ -925,4 +939,216 @@ svg path {
 .spellcheck-hint-btn:active,
 .input-del-btn:active {
   opacity: 0.8;
+}
+
+/* Grid cho lesson-circle-btn (responsive, không cố định số cột) */
+.lesson-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+  gap: 12px;
+  justify-content: center;
+  align-items: center;
+  padding: 20px 26px;
+  background: var(--color-bg-panel);
+  margin: 0 auto;
+  width: 100%;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-default) #eee;
+}
+
+.lesson-grid::-webkit-scrollbar {
+  width: 8px;
+  background: #eee;
+  border-radius: 8px;
+}
+.lesson-grid::-webkit-scrollbar-thumb {
+  background: var(--color-default);
+  border-radius: 8px;
+}
+
+.lesson-circle-btn {
+  width: 70%;
+  aspect-ratio: 1 / 1;
+  border-radius: 50%;
+  background: var(--color-secondary);
+  color: #fff;
+  font-size: 16px;
+  font-weight: 600;
+  border: 3px solid #e0e3e9;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.18s;
+  outline: none;
+  position: relative;
+  user-select: none;
+}
+.lesson-circle-btn.finished {
+  background: var(--color-default);
+  color: #222;
+  border-color: var(--color-default-content);
+  box-shadow: 0 4px 16px rgba(255, 202, 88, 0.18);
+}
+.lesson-circle-btn.current {
+  background: var(--color-correct);
+  color: #222;
+  border-color: var(--color-correct-content);
+  box-shadow: 0 4px 16px rgba(168, 230, 163, 0.18);
+}
+.lesson-circle-btn:not(.finished):not(.current) {
+  background: var(--color-bg);
+  color: var(--color-text);
+  border: 2px var(--color-secondary) solid;
+}
+.lesson-circle-btn:hover,
+.lesson-circle-btn:focus {
+  opacity: 0.7;
+  z-index: 2;
+}
+.lesson-circle-btn.active {
+  outline: 2px solid var(--color-default-content);
+  outline-offset: 2px;
+  z-index: 3;
+}
+
+/* Overlay cho lesson */
+.lesson-overlay {
+  display: none;
+  position: fixed;
+  top: 70px;
+  left: 0;
+  width: 100vw;
+  height: calc(100vh - 70px);
+  background: rgba(0, 0, 0, 0.18);
+  z-index: 9999;
+  align-items: center;
+  justify-content: center;
+}
+.lesson-overlay .overlay-content {
+  background: var(--color-bg-panel);
+  border-radius: 24px;
+  padding: 48px 64px;
+  font-size: 2rem;
+  color: var(--color-text);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+  min-width: 320px;
+  text-align: center;
+}
+
+/* Header cho bài học */
+.lesson-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.lesson-title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--color-text);
+}
+.lesson-number {
+  color: var(--color-text);
+  font-size: 2.2rem;
+  font-weight: 800;
+}
+.lesson-actions {
+  display: flex;
+  gap: 18px;
+  margin: 10px 0;
+}
+.lesson-btn {
+  padding: 10px 16px;
+  border-radius: 14px;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border: none;
+  cursor: pointer;
+  background: var(--color-default);
+  color: #403d39;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  border: 2px solid var(--color-default-content);
+  transition: all 0.2s;
+}
+.lesson-btn.new-btn {
+  background: var(--color-correct);
+  border-color: var(--color-correct-content);
+}
+.lesson-btn.review-btn {
+  background: var(--color-default);
+  border-color: var(--color-default-content);
+}
+.lesson-btn.skip-btn {
+  background: var(--color-wrong);
+  border-color: var(--color-wrong-content);
+}
+.lesson-btn:hover {
+  opacity: 0.7;
+}
+
+/* Bảng từ vựng */
+.lesson-table {
+  width: 100%;
+  border-collapse: collapse;
+  background: var(--color-bg-panel);
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+}
+.lesson-table th,
+.lesson-table td {
+  padding: 6px 8px;
+  text-align: left;
+  font-size: 1.08rem;
+}
+.lesson-table th {
+  background: var(--color-secondary);
+  color: var(--color-text-light);
+  font-weight: 700;
+}
+.lesson-table tr:nth-child(even) td {
+  background: var(--color-bg);
+}
+.lesson-table tr:nth-child(odd) td {
+  background: var(--color-bg-panel);
+}
+.lesson-table td {
+  color: var(--color-text);
+  border-bottom: 1px solid var(--color-secondary);
+}
+.lesson-table tr:last-child td {
+  border-bottom: none;
+}
+
+/* Progress bar cho bài học */
+.lesson-progress-bar {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+}
+.progress-label {
+  font-size: 1rem;
+  color: var(--color-secondary);
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+.progress-outer {
+  width: 100%;
+  height: 14px;
+  background: var(--color-secondary);
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
+}
+.progress-inner {
+  height: 100%;
+  background: var(--color-default-content);
+  border-radius: 8px;
+  transition: width 0.4s cubic-bezier(0.4, 1.4, 0.6, 1);
 }
