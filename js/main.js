@@ -9,6 +9,9 @@ import { PanelManager } from "./modules/PanelManager.js";
 import { FooterManager } from "./modules/FooterManager.js";
 import { LessonManager } from "./modules/LessonManager.js";
 import { QuizManager } from "./modules/QuizManager.js";
+import { ModalManager } from "./modules/ModalManager.js";
+import { VocabMainManager } from "./modules/VocabMainManager.js";
+import { HeaderManager } from "./modules/HeaderManager.js";
 
 /**
  * Class quản lý ứng dụng chính
@@ -20,7 +23,9 @@ class VocabApp {
     this.footerManager = null;
     this.lessonManager = null;
     this.quizManager = null;
-
+    this.modalManager = null;
+    this.vocabMainManager = null;
+    this.headerManager = null;
     this.init();
   }
 
@@ -38,6 +43,10 @@ class VocabApp {
       this.footerManager = new FooterManager();
       this.lessonManager = new LessonManager();
       this.quizManager = new QuizManager();
+      // Khởi tạo các manager mới
+      this.modalManager = new ModalManager(this.lessonManager);
+      this.vocabMainManager = new VocabMainManager(this.modalManager);
+      this.headerManager = new HeaderManager();
 
       console.log("✅ Ứng dụng đã được khởi tạo thành công!");
     } catch (error) {

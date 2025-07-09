@@ -32,7 +32,6 @@ export class LessonManager {
       console.log(`✅ Đã tải ${this.words.length} từ vựng`);
     } catch (error) {
       console.error("❌ Lỗi khi tải dữ liệu từ vựng:", error);
-      alert("Không thể tải dữ liệu từ vựng!");
     }
   }
 
@@ -74,7 +73,10 @@ export class LessonManager {
 
     // Tạo HTML cho bảng từ vựng
     const tableRows = lessonWords
-      .map((word) => `<tr><td>${word.word}</td><td>${word.meaning}</td></tr>`)
+      .map(
+        (word) =>
+          `<tr><td>${word.word}</td><td>${word.meaning}</td><td><button class="word-info-btn" title="Xem chi tiết"><i class="fa-solid fa-eye"></i></button></td></tr>`
+      )
       .join("");
 
     // Render lesson content
@@ -99,6 +101,7 @@ export class LessonManager {
             <tr>
               <th>Từ vựng</th>
               <th>Ý nghĩa</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>${tableRows}</tbody>

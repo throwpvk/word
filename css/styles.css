@@ -253,8 +253,6 @@ body {
 }
 
 .vocab-card {
-  background: var(--color-bg);
-  /* padding: 16px; */
   text-align: left;
   transition: all 0.5s ease;
   max-width: 100%;
@@ -317,11 +315,12 @@ body {
   background: var(--color-wrong);
   color: #403d39;
   border-radius: 12px;
+  padding: 0px 15px;
   height: 40px;
-  padding: 0 15px;
   font-weight: 500;
   cursor: pointer;
   transition: all 0.5s ease;
+  font-size: 14px;
 }
 
 .vocab-example {
@@ -353,7 +352,7 @@ body {
   justify-content: flex-start;
   gap: 15px;
   align-items: center;
-  margin-bottom: 20px;
+  margin-bottom: 10px;
 }
 
 .audio-btn {
@@ -473,7 +472,7 @@ svg path {
     max-width: 400px;
   }
   .vocab-card {
-    padding: 30px 40px 0 40px;
+    /* padding: 30px 40px 0 40px; */
   }
 }
 
@@ -548,7 +547,7 @@ svg path {
 
 .example,
 .example-translation {
-  font-size: clamp(16px, 2vw, 22px);
+  font-size: clamp(16px, 1.8vw, 18px);
 }
 
 .footer-next {
@@ -1108,7 +1107,7 @@ svg path {
 }
 .lesson-table th,
 .lesson-table td {
-  padding: 6px 8px;
+  padding: 8px;
   text-align: left;
   font-size: 1.08rem;
 }
@@ -1158,4 +1157,104 @@ svg path {
   background: var(--color-default-content);
   border-radius: 8px;
   transition: width 0.4s cubic-bezier(0.4, 1.4, 0.6, 1);
+}
+
+/* ========== Modal UI cho chi tiết từ vựng ========== */
+.modal {
+  position: fixed;
+  z-index: 9999;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(30, 32, 40, 0.85); /* overlay tối hơn */
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.5s ease;
+}
+.modal-content {
+  background: var(--color-bg);
+  padding: 0;
+  border-radius: 16px;
+  width: 90%;
+  max-width: 600px;
+  height: 80%;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+  position: relative;
+  transition: all 0.5s ease;
+}
+
+.modal-close {
+  position: absolute;
+  right: 0px;
+  top: -40px;
+  font-size: 2rem;
+  color: var(--color-text-light);
+  cursor: pointer;
+  transition: color 0.2s;
+  z-index: 2;
+  background: none;
+  border: none;
+}
+.modal-close:hover {
+  opacity: 0.5;
+}
+.modal-close:active {
+  opacity: 0.8;
+}
+
+.modal-body {
+  width: 100%;
+  height: 100%;
+  color: var(--color-text);
+  font-size: 1.08rem;
+  padding: 16px;
+  overflow-y: scroll;
+}
+.modal-body h2 {
+  margin-top: 0;
+  margin-bottom: 8px;
+  color: var(--color-primary);
+  font-weight: 700;
+}
+.modal-body p {
+  margin: 6px 0 4px 0;
+}
+.modal-body ul {
+  margin: 8px 0 0 18px;
+  padding: 0;
+  color: var(--color-text);
+  font-size: 1rem;
+}
+.modal-body li {
+  margin-bottom: 4px;
+  line-height: 1.5;
+}
+.modal-body audio {
+  margin: 8px 0 8px 0;
+  width: 100%;
+  outline: none;
+}
+
+.word-info-btn {
+  background: transparent;
+  border: none;
+  font-size: 18px;
+  color: var(--color-text);
+}
+
+body > main > table > tbody > tr > td:nth-child(3) {
+  text-align: right;
+  width: 22px;
+}
+
+@media (min-width: 768px) {
+  .modal-content {
+    font-size: 0.98rem;
+  }
 }
