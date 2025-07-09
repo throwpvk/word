@@ -940,10 +940,19 @@ svg path {
 }
 
 /* Grid cho lesson-circle-btn (responsive, không cố định số cột) */
+.lesson-container {
+  width: 100%;
+  height: 100%;
+  overflow-y: scroll;
+  padding-bottom: 30vh;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-correct) transparent;
+}
+
 .lesson-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
-  gap: 12px;
+  gap: 16px 14px;
   justify-content: center;
   align-items: center;
   padding: 20px 26px;
@@ -952,7 +961,7 @@ svg path {
   width: 100%;
   overflow-y: auto;
   scrollbar-width: thin;
-  scrollbar-color: var(--color-default) #eee;
+  scrollbar-color: var(--color-correct) transparent;
 }
 
 .lesson-grid::-webkit-scrollbar {
