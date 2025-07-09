@@ -134,8 +134,8 @@ body {
   cursor: pointer;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
   border: 2px solid transparent;
-  transition: background-color 0.3s ease, box-shadow 0.3s ease,
-    transform 0.2s ease, border 0.3s ease;
+  transition: background-color 0.5s ease, box-shadow 0.5s ease,
+    transform 0.5s ease, border 0.5s ease;
 }
 
 .lesson-menu .level-item:hover {
@@ -951,8 +951,8 @@ svg path {
 
 .lesson-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
-  gap: 16px 14px;
+  grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+  gap: 16px 0px;
   justify-content: center;
   align-items: center;
   padding: 20px 26px;
@@ -988,7 +988,7 @@ svg path {
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all 0.18s;
+  transition: all 0.5s ease;
   outline: none;
   position: relative;
   user-select: none;
@@ -1079,7 +1079,7 @@ svg path {
   color: #403d39;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   border: 2px solid var(--color-default-content);
-  transition: all 0.2s;
+  transition: all 0.5s ease;
 }
 .lesson-btn.new-btn {
   background: var(--color-correct);
