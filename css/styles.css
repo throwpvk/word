@@ -14,21 +14,19 @@
   --color-text-light: #fff8e5;
   --color-secondary: #888888;
 
-  --color-correct: #9ae6b4;
+  /* --color-correct: #9ae6b4;
   --color-correct-content: #43c282;
   --color-wrong: #feb2b2;
   --color-wrong-content: #c73c3c;
   --color-default: #ffca58;
-  --color-default-content: #f0ad4e;
+  --color-default-content: #f0ad4e; */
 
-  --color-correct: #a8e6a3; /* xanh lá tươi pastel, mượt mà */
-  --color-correct-content: #3dbf6e; /* xanh lá tươi, hơi ngả mint nhẹ */
-
-  --color-wrong: #feb2b2; /* đỏ pastel nhạt hơn, mềm hơn chút */
-  --color-wrong-content: #e04848; /* đỏ tươi đậm mà không quá gắt */
-
-  --color-default: #ffe87c; /* vàng pastel tươi sáng hơn chút */
-  --color-default-content: #e8b42f; /* vàng cam đậm ấm áp */
+  --color-correct: #a8e6a3;
+  --color-correct-content: #3dbf6e;
+  --color-wrong: #feb2b2;
+  --color-wrong-content: #e04848;
+  --color-default: #ffe87c;
+  --color-default-content: #e8b42f;
 }
 
 * {
