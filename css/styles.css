@@ -1214,7 +1214,9 @@ svg path {
   color: var(--color-text);
   font-size: 1.08rem;
   padding: 16px;
-  overflow-y: hidden;
+  overflow-y: scroll;
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-correct) transparent;
 }
 .modal-body h2 {
   margin-top: 0;
@@ -1256,5 +1258,6 @@ body > main > table > tbody > tr > td:nth-child(3) {
 @media (min-width: 768px) {
   .modal-content {
     font-size: 0.98rem;
+    padding: 16px;
   }
 }
