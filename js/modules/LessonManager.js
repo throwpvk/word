@@ -9,7 +9,7 @@ export class LessonManager {
   constructor() {
     this.words = [];
     this.currentLesson = 1;
-    this.wordsPerLesson = 30;
+    this.wordsPerLesson = 50;
     this.init();
   }
 
@@ -50,9 +50,12 @@ export class LessonManager {
 
     for (let i = 1; i <= totalLessons; i++) {
       const btn = document.createElement("button");
+      const start = (i - 1) * this.wordsPerLesson;
+      const end =
+        start + Math.min(this.wordsPerLesson, this.words.length - start);
       btn.className = "lesson-circle-btn";
       btn.dataset.index = i;
-      btn.innerText = i;
+      btn.innerText = `${start} - ${end}`;
 
       btn.onclick = () => this.loadLessonData(i);
       DOM.lessonGrid.appendChild(btn);
@@ -66,7 +69,8 @@ export class LessonManager {
   async loadLessonData(lessonIndex) {
     this.currentLesson = lessonIndex;
     const start = (lessonIndex - 1) * this.wordsPerLesson;
-    const end = start + this.wordsPerLesson;
+    const end =
+      start + Math.min(this.wordsPerLesson, this.words.length - start);
     const lessonWords = this.words.slice(start, end);
 
     // Tính toán tiến độ học
@@ -80,7 +84,7 @@ export class LessonManager {
     const tableRows = lessonWords
       .map(
         (word) =>
-          `<tr><td>${word.word}</td><td>${word.meaning}</td><td><button class="word-info-btn" title="Xem chi tiết"><i class="fa-solid fa-eye"></i></button></td></tr>`
+          `<tr><td>${word.id}</td><td>${word.word}</td><td>${word.meaning}</td><td><button class="word-info-btn" title="Xem chi tiết"><i class="fa-solid fa-ellipsis-vertical"></i></i></button></td></tr>`
       )
       .join("");
 
@@ -88,7 +92,7 @@ export class LessonManager {
     if (DOM.vocabMain) {
       DOM.vocabMain.innerHTML = `
         <div class="lesson-header">
-          <div class="lesson-title">Bài <span class="lesson-number">${lessonIndex}</span></div>
+          <div class="lesson-title"><span class="lesson-number">${start} - ${end}</span></div>
           <div class="lesson-progress-bar">
             <div class="progress-label">Đã học: ${percent}%</div>
             <div class="progress-outer">
@@ -104,6 +108,7 @@ export class LessonManager {
         <table class="lesson-table">
           <thead>
             <tr>
+              <th>No.</th>
               <th>Từ vựng</th>
               <th>Ý nghĩa</th>
               <th></th>
@@ -130,6 +135,16 @@ export class LessonManager {
     }
     if (DOM.settingsBtn) {
       DOM.settingsBtn.innerHTML = `<i class="fas fa-gear"></i>`;
+    }
+
+    // Bật tắt cuộn cho body, tránh cuộn kép khi mở panel
+    const menuOpen = DOM.menuPanel?.classList.contains("show");
+    const settingsOpen = DOM.settingsPanel?.classList.contains("show");
+
+    if (menuOpen || settingsOpen) {
+      document.body.classList.add("no-scroll");
+    } else {
+      document.body.classList.remove("no-scroll");
     }
   }
 

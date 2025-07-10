@@ -32,16 +32,13 @@ export class VocabMainManager {
         this.handleLessonBtn(e.target);
       }
       // Xử lý click vào nút info
-      if (e.target.closest(".word-info-btn")) {
+      if (
+        e.target.closest("body > main > table > tbody > tr > td:nth-child(4)")
+      ) {
         const tr = e.target.closest("tr");
         if (tr) this.handleWordRowClick(tr);
         return;
       }
-      // Xử lý click vào <tr> của bảng từ vựng (nếu muốn giữ lại logic này)
-      // let tr = e.target.closest('tr');
-      // if (tr && tr.parentElement.tagName === 'TBODY') {
-      //   this.handleWordRowClick(tr);
-      // }
     });
   }
 
@@ -73,7 +70,7 @@ export class VocabMainManager {
    * Xử lý khi nhấn vào <tr> của bảng từ vựng
    */
   handleWordRowClick(tr) {
-    const word = tr.children[0]?.innerText;
+    const word = tr.children[1]?.innerText;
     if (word && this.modalManager) {
       this.modalManager.showWordDetail(word);
     }
