@@ -66,6 +66,16 @@ export class PanelManager {
     btn.innerHTML = isShown
       ? `<i class="fa-solid fa-xmark"></i>`
       : `<i class="fas ${defaultIcon}"></i>`;
+
+    // Bật tắt cuộn cho body, tránh cuộn kép khi mở panel
+    const menuOpen = DOM.menuPanel?.classList.contains("show");
+    const settingsOpen = DOM.settingsPanel?.classList.contains("show");
+
+    if (menuOpen || settingsOpen) {
+      document.body.classList.add("no-scroll");
+    } else {
+      document.body.classList.remove("no-scroll");
+    }
   }
 
   /**
@@ -81,5 +91,7 @@ export class PanelManager {
     if (DOM.settingsBtn) {
       DOM.settingsBtn.innerHTML = `<i class="fas fa-gear"></i>`;
     }
+    // mở cuộn lại cho body
+    document.body.classList.remove("no-scroll");
   }
 }

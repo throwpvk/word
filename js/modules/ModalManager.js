@@ -77,6 +77,7 @@ export class ModalManager {
   show() {
     this.modal.style.visibility = "visible";
     this.modal.style.opacity = "1";
+    document.body.classList.add("no-scroll");
   }
 
   /**
@@ -85,5 +86,6 @@ export class ModalManager {
   hide() {
     this.modal.style.visibility = "hidden";
     this.modal.style.opacity = "0";
+    document.body.classList.remove("no-scroll");
   }
 }

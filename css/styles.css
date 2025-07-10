@@ -48,6 +48,10 @@ body {
   font-weight: 500;
 }
 
+body.no-scroll {
+  overflow: hidden;
+}
+
 /* Header */
 .header-bar {
   position: fixed;
