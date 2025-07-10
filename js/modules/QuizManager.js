@@ -7,10 +7,34 @@ import { DOM } from "./DOM.js";
 
 export class QuizManager {
   constructor() {
+    this.words = [];
+    this.currentLessonWords = [];
     this.currentQuizIndex = 0;
+    this.wordsPerSesssion = 5;
     this.quizTemplates = this.createQuizTemplates();
     this.init();
   }
+
+  /**
+   * Khởi tạo các loại quiz
+   */
+  QUIZ_TYPES = {
+    INTRO: 1,
+    ENTOVI: 2,
+    VITOEN: 3,
+    AUDIO: 4,
+    SPELL: 5,
+  };
+
+  /**
+   * Các giai đoạn học
+   * 1: Học mới từ đầu
+   * 2: Luyện tập lần 2
+   */
+  LEARN_PHASE = {
+    LEARN: 1,
+    PRACTICE: 2,
+  };
 
   /**
    * Khởi tạo quiz manager
@@ -28,6 +52,8 @@ export class QuizManager {
       .querySelector(".footer-next")
       ?.addEventListener("pointerup", () => {
         this.nextQuiz();
+        // DOM.vocabMain.innerHTML = this.getQuizHTMLByType(3, this.QUIZ_TYPES.INTRO);
+        console.log(this.getQuizOrder([1, 2, 3, 4, 5], this.LEARN_PHASE.LEARN));
       });
   }
 
@@ -211,7 +237,6 @@ export class QuizManager {
         // Chỉ sử dụng compromise nếu thư viện đã được load
         if (this.isCompromiseReady()) {
           try {
-            // Thử nhiều cách để truy cập compromise
             const nlpFunction =
               window.nlp || nlp || window.compromise || compromise;
 
@@ -267,6 +292,10 @@ export class QuizManager {
     }
   }
 
+  /**
+   * Tạo card dạng intro
+   * @param {Object} wordData - Dữ liệu từ vựng
+   */
   getIntroHTML(wordData) {
     let examplesHtml = `<label class="vocab-label">Ví dụ</label>`;
     const exampleLength = wordData.details.examples.length;
@@ -283,6 +312,7 @@ export class QuizManager {
         examplesHtml += `
         <div class="vocab-example">
           <p class="example">${highlighted}</p>
+          <p class="example-translation">${wordData.details.examples[i].vi}</p>
         </div>
       `;
       }
@@ -328,6 +358,187 @@ export class QuizManager {
   }
 
   /**
+   * Tạo quiz trắc nghiệm en to vi
+   * @param {Object} wordData - Dữ liệu từ vựng
+   */
+  getEnToViHTML(wordData) {
+    // TODO
+  }
+
+  /**
+   * Tạo quiz trắc nghiệm vi to en
+   * @param {Object} wordData - Dữ liệu từ vựng
+   */
+  getViToEnHTML(wordData) {
+    // TODO
+  }
+
+  /**
+   * Tạo quiz trắc nghiệm audio to vi
+   * @param {Object} wordData - Dữ liệu từ vựng
+   */
+  getAudioToViHTML(wordData) {
+    // TODO
+  }
+
+  /**
+   * Tạo quiz spell check
+   * @param {Object} wordData - Dữ liệu từ vựng
+   */
+  getSpellHTML(wordData) {
+    // TODO
+  }
+
+  /**
+   * Lấy từ vựng từ id
+   * @param {Number} id - id từ vựng
+   */
+  getWordById(id) {
+    return this.words.find((word) => word.id === id);
+  }
+
+  /**
+   * Lấy html quiz bởi id từ vựng và type
+   * @param {Number} wordId - id từ vựng
+   * @param {Number} type - loại quiz
+   */
+  getQuizHTMLByType(wordId, type) {
+    switch (type) {
+      case this.QUIZ_TYPES.INTRO:
+        return this.getIntroHTML(this.getWordById(wordId));
+      case this.QUIZ_TYPES.ENTOVI:
+        return this.getEnToViHTML(this.getWordById(wordId));
+      case this.QUIZ_TYPES.VITOEN:
+        return this.getViToEnHTML(this.getWordById(wordId));
+      case this.QUIZ_TYPES.AUDIO:
+        return this.getAudioToViHTML(this.getWordById(wordId));
+      case this.QUIZ_TYPES.SPELL:
+        return this.getSpellHTML(this.getWordById(wordId));
+    }
+  }
+
+  /**
+   * Tạo thứ tự quiz
+   * @param {Array} wordIds - Dữ liệu từ vựng
+   * @param {Number} phase - Phiên học, 1; learn, 2: practice
+   * @param {Boolean} hasAudio - Có bật chế độ quiz với audio hay không
+   * @param {Boolean} hasSpell - Có bật chế độ quiz với spell check hay không
+   */
+  getQuizOrder(wordIds, phase, hasAudio = true, hasSpell = true) {
+    const ids = wordIds;
+    let quizId = 1;
+
+    // Hàm hỗ trợ chọn quizType tùy theo điều kiện
+    const choose = (type) => {
+      if (type === this.QUIZ_TYPES.AUDIO && !hasAudio)
+        return this.QUIZ_TYPES.ENTOVI;
+      if (type === this.QUIZ_TYPES.SPELL && !hasSpell)
+        return this.QUIZ_TYPES.ENTOVI;
+      return type;
+    };
+
+    // Hàm tạo object quiz với html
+    const createQuiz = (wordId, type) => {
+      if (!wordId) return null;
+      const quizType = choose(type);
+      return {
+        quizId: quizId++,
+        wordId,
+        quizType,
+        html: this.getQuizHTMLByType(wordId, quizType),
+        isCorrect: false,
+      };
+    };
+
+    // Danh sách quiz theo phase
+    const quizzes =
+      phase === this.LEARN_PHASE.LEARN
+        ? [
+            createQuiz(ids[0], this.QUIZ_TYPES.INTRO),
+            createQuiz(ids[1], this.QUIZ_TYPES.INTRO),
+            createQuiz(ids[0], this.QUIZ_TYPES.ENTOVI),
+            createQuiz(ids[1], this.QUIZ_TYPES.ENTOVI),
+            createQuiz(ids[2], this.QUIZ_TYPES.INTRO),
+            createQuiz(ids[0], this.QUIZ_TYPES.VITOEN),
+            createQuiz(ids[2], this.QUIZ_TYPES.ENTOVI),
+            createQuiz(ids[1], this.QUIZ_TYPES.VITOEN),
+            createQuiz(ids[3], this.QUIZ_TYPES.INTRO),
+            createQuiz(ids[2], this.QUIZ_TYPES.VITOEN),
+            createQuiz(ids[3], this.QUIZ_TYPES.ENTOVI),
+            createQuiz(ids[0], this.QUIZ_TYPES.AUDIO),
+            createQuiz(ids[1], this.QUIZ_TYPES.AUDIO),
+            createQuiz(ids[3], this.QUIZ_TYPES.VITOEN),
+            createQuiz(ids[2], this.QUIZ_TYPES.AUDIO),
+            createQuiz(ids[4], this.QUIZ_TYPES.INTRO),
+            createQuiz(ids[3], this.QUIZ_TYPES.AUDIO),
+            createQuiz(ids[4], this.QUIZ_TYPES.ENTOVI),
+            createQuiz(ids[0], this.QUIZ_TYPES.ENTOVI),
+            createQuiz(ids[4], this.QUIZ_TYPES.VITOEN),
+            createQuiz(ids[2], this.QUIZ_TYPES.ENTOVI),
+            createQuiz(ids[1], this.QUIZ_TYPES.ENTOVI),
+            createQuiz(ids[4], this.QUIZ_TYPES.AUDIO),
+            createQuiz(ids[3], this.QUIZ_TYPES.ENTOVI),
+            createQuiz(ids[4], this.QUIZ_TYPES.ENTOVI),
+            createQuiz(ids[3], this.QUIZ_TYPES.SPELL),
+            createQuiz(ids[2], this.QUIZ_TYPES.SPELL),
+            createQuiz(ids[0], this.QUIZ_TYPES.SPELL),
+            createQuiz(ids[4], this.QUIZ_TYPES.SPELL),
+            createQuiz(ids[1], this.QUIZ_TYPES.SPELL),
+          ]
+        : phase === this.LEARN_PHASE.PRACTICE
+        ? [
+            createQuiz(ids[2], this.QUIZ_TYPES.ENTOVI),
+            createQuiz(ids[1], this.QUIZ_TYPES.ENTOVI),
+            createQuiz(ids[0], this.QUIZ_TYPES.ENTOVI),
+            createQuiz(ids[4], this.QUIZ_TYPES.ENTOVI),
+            createQuiz(ids[3], this.QUIZ_TYPES.ENTOVI),
+
+            createQuiz(ids[1], this.QUIZ_TYPES.VITOEN),
+            createQuiz(ids[4], this.QUIZ_TYPES.VITOEN),
+            createQuiz(ids[0], this.QUIZ_TYPES.VITOEN),
+            createQuiz(ids[3], this.QUIZ_TYPES.VITOEN),
+            createQuiz(ids[2], this.QUIZ_TYPES.VITOEN),
+
+            createQuiz(ids[4], this.QUIZ_TYPES.AUDIO),
+            createQuiz(ids[0], this.QUIZ_TYPES.AUDIO),
+            createQuiz(ids[3], this.QUIZ_TYPES.AUDIO),
+            createQuiz(ids[1], this.QUIZ_TYPES.AUDIO),
+            createQuiz(ids[2], this.QUIZ_TYPES.AUDIO),
+
+            createQuiz(ids[1], this.QUIZ_TYPES.SPELL),
+            createQuiz(ids[2], this.QUIZ_TYPES.SPELL),
+            createQuiz(ids[4], this.QUIZ_TYPES.SPELL),
+            createQuiz(ids[3], this.QUIZ_TYPES.SPELL),
+            createQuiz(ids[0], this.QUIZ_TYPES.SPELL),
+
+            createQuiz(ids[0], this.QUIZ_TYPES.ENTOVI),
+            createQuiz(ids[1], this.QUIZ_TYPES.ENTOVI),
+            createQuiz(ids[2], this.QUIZ_TYPES.ENTOVI),
+            createQuiz(ids[3], this.QUIZ_TYPES.ENTOVI),
+            createQuiz(ids[4], this.QUIZ_TYPES.ENTOVI),
+
+            createQuiz(ids[3], this.QUIZ_TYPES.SPELL),
+            createQuiz(ids[2], this.QUIZ_TYPES.SPELL),
+            createQuiz(ids[0], this.QUIZ_TYPES.SPELL),
+            createQuiz(ids[4], this.QUIZ_TYPES.SPELL),
+            createQuiz(ids[1], this.QUIZ_TYPES.SPELL),
+          ]
+        : [];
+
+    return quizzes.filter(Boolean);
+  }
+
+  /**
+   * Kiểm tra đáp án
+   * @param {string} selectedAnswer - Đáp án được chọn
+   * @param {string} correctAnswer - Đáp án đúng
+   * @returns {boolean} Kết quả đúng/sai
+   */
+  checkAnswer(selectedAnswer, correctAnswer) {
+    return selectedAnswer === correctAnswer;
+  }
+
+  /**
    * Chuyển sang quiz tiếp theo
    */
   nextQuiz() {
@@ -339,60 +550,18 @@ export class QuizManager {
   }
 
   /**
-   * Tạo quiz từ dữ liệu từ vựng
-   * @param {Object} wordData - Dữ liệu từ vựng
-   * @returns {Object} Quiz object
+   * Nhận danh sách từ vựng từ LessonManager
+   * @param {Array} words - Danh sách từ vựng
    */
-  createQuizFromWord(wordData) {
-    return {
-      type: "multiple-choice",
-      word: wordData.word,
-      meaning: wordData.meaning,
-      choices: this.generateChoices(wordData.meaning),
-      correctAnswer: wordData.meaning,
-    };
+  setAllWords(words) {
+    this.words = words;
   }
 
   /**
-   * Tạo các lựa chọn cho câu hỏi
-   * @param {string} correctAnswer - Đáp án đúng
-   * @returns {Array} Danh sách các lựa chọn
+   * Nhận danh sách từ vựng từ LessonManager
+   * @param {Array} words - Danh sách từ vựng
    */
-  generateChoices(correctAnswer) {
-    // TODO: Implement logic tạo các lựa chọn ngẫu nhiên
-    const fakeAnswers = [
-      "Giận dữ",
-      "Cao",
-      "Bẩn",
-      "Nhanh",
-      "Chậm",
-      "To",
-      "Nhỏ",
-      "Mới",
-      "Cũ",
-      "Tốt",
-      "Xấu",
-    ];
-
-    const choices = [correctAnswer];
-    const shuffled = fakeAnswers.sort(() => 0.5 - Math.random());
-
-    for (let i = 0; i < 3; i++) {
-      if (shuffled[i] !== correctAnswer) {
-        choices.push(shuffled[i]);
-      }
-    }
-
-    return choices.sort(() => 0.5 - Math.random());
-  }
-
-  /**
-   * Kiểm tra đáp án
-   * @param {string} selectedAnswer - Đáp án được chọn
-   * @param {string} correctAnswer - Đáp án đúng
-   * @returns {boolean} Kết quả đúng/sai
-   */
-  checkAnswer(selectedAnswer, correctAnswer) {
-    return selectedAnswer === correctAnswer;
+  setLessonWords(words) {
+    this.currentLessonWords = words;
   }
 }

@@ -35,6 +35,10 @@ export class LessonManager {
     try {
       const response = await fetch("./words/toeicWords.json");
       this.words = await response.json();
+      // Truyền từ vựng sang QuizManager nếu có
+      if (window.vocabApp && window.vocabApp.quizManager) {
+        window.vocabApp.quizManager.setAllWords(this.words);
+      }
     } catch (error) {
       console.error("❌ Lỗi khi tải dữ liệu từ vựng:", error);
     }
@@ -64,7 +68,7 @@ export class LessonManager {
 
   /**
    * Tải dữ liệu lesson theo index
-   * @param {number} lessonIndex - Index của lesson (1-60)
+   * @param {number} lessonIndex
    */
   async loadLessonData(lessonIndex) {
     this.currentLesson = lessonIndex;
@@ -73,12 +77,14 @@ export class LessonManager {
       start + Math.min(this.wordsPerLesson, this.words.length - start);
     const lessonWords = this.words.slice(start, end);
 
-    // Tính toán tiến độ học
+    // TODO: Tính toán tiến độ học
     const learnedCount = lessonWords.filter((word) => word.learned).length;
-    const percent =
-      lessonWords.length > 0
-        ? Math.round((learnedCount / lessonWords.length) * 100)
-        : 0;
+    // const percent =
+    //   lessonWords.length > 0
+    //     ? Math.round((learnedCount / lessonWords.length) * 100)
+    //     : 0;
+
+    const percent = 30;
 
     // Tạo HTML cho bảng từ vựng
     const tableRows = lessonWords
@@ -95,9 +101,7 @@ export class LessonManager {
           <div class="lesson-title"><span class="lesson-number">${start} - ${end}</span></div>
           <div class="lesson-progress-bar">
             <div class="progress-label">Đã học: ${percent}%</div>
-            <div class="progress-outer">
-              <div class="progress-inner" style="width:${percent}%"></div>
-            </div>
+            <div class="lesson-progress" style="--lesson-progress: ${percent}%"></div>
           </div>
           <div class="lesson-actions">
             <button class="lesson-btn review-btn">Ôn tập</button>
@@ -121,6 +125,11 @@ export class LessonManager {
 
     // Ẩn panel sau khi load lesson
     this.hidePanel();
+
+    // Truyền từ vựng sang QuizManager nếu có
+    if (window.vocabApp && window.vocabApp.quizManager) {
+      window.vocabApp.quizManager.setAllWords(lessonWords);
+    }
   }
 
   /**

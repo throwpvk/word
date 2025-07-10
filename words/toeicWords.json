@@ -10,15 +10,15 @@
       "examples": [
         {
           "en": "Out with the old, in with the new.",
-          "vi": ""
+          "vi": "Cái cũ đi, cái mới đến."
         },
         {
           "en": "This is a new scratch on my car",
-          "vi": ""
+          "vi": "Đây là một vết trầy mới trên xe của tôi."
         },
         {
           "en": "The band just released a new album",
-          "vi": ""
+          "vi": "Ban nhạc vừa phát hành một album mới."
         }
       ]
     }
@@ -34,11 +34,15 @@
       "examples": [
         {
           "en": "Keep the house clean; I have company coming.",
-          "vi": ""
+          "vi": "Giữ nhà cửa sạch sẽ nhé; sắp có khách tới."
         },
         {
           "en": "I treasure your company.",
-          "vi": ""
+          "vi": "Tôi trân trọng sự hiện diện của bạn."
+        },
+        {
+          "en": "She works for a software company in Tokyo.",
+          "vi": "Cô ấy làm việc cho một công ty phần mềm ở Tokyo."
         }
       ]
     }

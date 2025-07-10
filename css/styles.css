@@ -86,7 +86,7 @@ body.no-scroll {
     var(--color-correct-content) var(--progress),
     var(--color-correct, #ddd) var(--progress)
   );
-  transition: background 0.3s ease;
+  transition: background 0.5s ease;
 }
 
 .menu-btn,
@@ -321,10 +321,11 @@ body.no-scroll {
   border-radius: 12px;
   padding: 0px 15px;
   height: 40px;
-  font-weight: 500;
+  font-family: "Charis SIL", serif;
+  font-weight: 400;
   cursor: pointer;
   transition: all 0.5s ease;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 .vocab-example {
@@ -1117,19 +1118,18 @@ body > main > table > thead > tr > th:nth-child(1) {
   font-weight: 600;
   margin-bottom: 2px;
 }
-.progress-outer {
+
+.lesson-progress {
+  height: 16px;
   width: 100%;
-  height: 14px;
-  background: var(--color-secondary);
-  border-radius: 8px;
-  overflow: hidden;
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.06);
-}
-.progress-inner {
-  height: 100%;
-  background: var(--color-default-content);
-  border-radius: 8px;
-  transition: width 0.4s cubic-bezier(0.4, 1.4, 0.6, 1);
+  border-radius: 999px;
+  border: 2px var(--color-default-content) solid;
+  background: linear-gradient(
+    to right,
+    var(--color-default-content) var(--lesson-progress),
+    var(--color-default, #ddd) var(--lesson-progress)
+  );
+  transition: background 0.5s ease;
 }
 
 /* ========== Modal UI cho chi tiết từ vựng ========== */

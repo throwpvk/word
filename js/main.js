@@ -7,8 +7,8 @@ import { DOM, validateDOM } from "./modules/DOM.js";
 import { ThemeManager } from "./modules/ThemeManager.js";
 import { PanelManager } from "./modules/PanelManager.js";
 import { FooterManager } from "./modules/FooterManager.js";
-import { LessonManager } from "./modules/LessonManager.js";
 import { QuizManager } from "./modules/QuizManager.js";
+import { LessonManager } from "./modules/LessonManager.js";
 import { ModalManager } from "./modules/ModalManager.js";
 import { VocabMainManager } from "./modules/VocabMainManager.js";
 import { HeaderManager } from "./modules/HeaderManager.js";
@@ -21,8 +21,8 @@ class VocabApp {
     this.themeManager = null;
     this.panelManager = null;
     this.footerManager = null;
-    this.lessonManager = null;
     this.quizManager = null;
+    this.lessonManager = null;
     this.modalManager = null;
     this.vocabMainManager = null;
     this.headerManager = null;
@@ -41,8 +41,8 @@ class VocabApp {
       this.themeManager = new ThemeManager();
       this.panelManager = new PanelManager();
       this.footerManager = new FooterManager();
-      this.lessonManager = new LessonManager();
       this.quizManager = new QuizManager();
+      this.lessonManager = new LessonManager();
       // Khởi tạo các manager mới
       this.modalManager = new ModalManager(this.lessonManager);
       this.vocabMainManager = new VocabMainManager(this.modalManager);
