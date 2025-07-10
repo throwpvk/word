@@ -165,7 +165,9 @@ export class DataRenderer {
             examples.push({ en: def.example, vi });
           }
         }
+        if (examples.length >= 3) break;
       }
+      if (examples.length >= 3) break;
     }
 
     return {
