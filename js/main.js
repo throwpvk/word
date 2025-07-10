@@ -47,8 +47,6 @@ class VocabApp {
       this.modalManager = new ModalManager(this.lessonManager);
       this.vocabMainManager = new VocabMainManager(this.modalManager);
       this.headerManager = new HeaderManager();
-
-      console.log("✅ Ứng dụng đã được khởi tạo thành công!");
     } catch (error) {
       console.error("❌ Lỗi khi khởi tạo ứng dụng:", error);
     }

@@ -20,7 +20,13 @@ export class LessonManager {
     await this.loadWords();
     this.createLessonButtons();
     this.loadLessonData(1);
+    this.bindEvents();
   }
+
+  /**
+   * Bind các event listeners
+   */
+  bindEvents() {}
 
   /**
    * Tải dữ liệu từ vựng từ file JSON
@@ -29,7 +35,6 @@ export class LessonManager {
     try {
       const response = await fetch("./words/toeicWords.json");
       this.words = await response.json();
-      console.log(`✅ Đã tải ${this.words.length} từ vựng`);
     } catch (error) {
       console.error("❌ Lỗi khi tải dữ liệu từ vựng:", error);
     }

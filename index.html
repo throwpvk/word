@@ -18,6 +18,16 @@
       referrerpolicy="no-referrer"
     />
     <link rel="stylesheet" href="./css/styles.css" />
+    <script src="https://unpkg.com/compromise@14.10.0/builds/compromise.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/compromise@14.10.0/builds/compromise.min.js"></script>
+    <script>
+      // Đảm bảo compromise được load
+      window.addEventListener("load", function () {
+        if (typeof window.nlp === "undefined" && typeof nlp !== "undefined") {
+          window.nlp = nlp;
+        }
+      });
+    </script>
   </head>
   <body>
     <!-- Header -->
