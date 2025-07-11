@@ -53,11 +53,11 @@ export class QuizManager {
       ?.addEventListener("pointerup", () => {
         // this.nextQuiz();
         DOM.vocabMain.innerHTML = this.getQuizHTMLByType(
-          2,
           1,
-          this.QUIZ_TYPES.AUDIO
+          2,
+          this.QUIZ_TYPES.SPELL
         );
-        this.bindAudioBtnEvent();
+        this.bindQuizBtnEvent();
       });
   }
 
@@ -70,12 +70,96 @@ export class QuizManager {
   };
 
   /**
+   * Xử lý sự kiện nhấn nút trong bài quiz spell
+   */
+  spellBtnHandler = (e) => {
+    const vocabMain = e.currentTarget.closest(".vocab-main");
+    const answer = vocabMain.querySelector(".answer-text");
+    const char = e.currentTarget.dataset.char;
+    answer.textContent += char === "⎵" ? " " : char;
+  };
+
+  delBtnHandler = (e) => {
+    const vocabMain = e.currentTarget.closest(".vocab-main");
+    const answer = vocabMain.querySelector(".answer-text");
+    if (!answer) return;
+    let text = answer.textContent || "";
+    if (text.length === 0) return;
+    // Xóa 1 ký tự cuối
+    text = text.slice(0, -1);
+    // Cập nhật lại nội dung
+    answer.textContent = text;
+  };
+
+  hintBtnHandler = (e) => {
+    const vocabMain = e.currentTarget.closest(".vocab-main");
+    const answer = vocabMain.querySelector(".answer-text");
+    const text = answer.textContent || "";
+    let word = (answer.dataset.word || "").toUpperCase();
+
+    // Xóa hết nội dung cũ
+    answer.textContent = "";
+
+    if (word.startsWith(text)) {
+      word = word.replace(text, "");
+      // Gán lại text đã nhập (nếu đúng)
+      answer.textContent += text;
+    }
+
+    // Thêm chữ cái đầu của phần còn lại nếu còn
+    if (word.length > 0) {
+      answer.textContent += word[0];
+    }
+  };
+
+  /**
+   * Xử lý sự kiện nhấn nút Kiểm tra trong bài quiz spell
+   */
+  spellCheckBtnHandler = (e) => {
+    const vocabMain = e.currentTarget.closest(".vocab-main");
+    const answer = vocabMain.querySelector(".answer-text");
+    const word = answer.dataset.word;
+
+    if (word.toLowerCase() === answer.textContent.toLowerCase()) {
+      window.vocabApp.footerManager.showFooter(
+        "correct",
+        "Chính xác. Tuyệt vời!"
+      );
+    } else {
+      window.vocabApp.footerManager.showFooter(
+        "wrong",
+        "Sai mất rồi. Cố gắng chút nữa!"
+      );
+    }
+  };
+
+  /**
    * Khởi tạo DOM event cho nút Audio, gọi sau khi add nút Audio vào DOM
    */
-  bindAudioBtnEvent() {
+  bindQuizBtnEvent() {
     document.querySelectorAll(".audio-btn").forEach((btn) => {
       btn.removeEventListener("pointerup", this.audioBtnHandler); // remove handle cũ
       btn.addEventListener("pointerup", this.audioBtnHandler);
+    });
+
+    document.querySelectorAll(".spellcheck-char").forEach((btn) => {
+      btn.removeEventListener("pointerup", this.spellBtnHandler);
+      btn.addEventListener("pointerup", this.spellBtnHandler);
+    });
+
+    document.querySelectorAll(".spellcheck-check-btn").forEach((btn) => {
+      btn.removeEventListener("pointerup", this.spellCheckBtnHandler);
+      btn.addEventListener("pointerup", this.spellCheckBtnHandler);
+    });
+
+    document.querySelectorAll(".input-del-btn").forEach((btn) => {
+      btn.removeEventListener("pointerup", this.delBtnHandler);
+      btn.addEventListener("pointerup", this.delBtnHandler);
+    });
+
+    document.querySelectorAll(".spellcheck-hint-btn").forEach((btn) => {
+      btn.removeEventListener("pointerup", this.hintBtnHandler);
+      btn.addEventListener("pointerup", this.hintBtnHandler);
     });
   }
 
@@ -412,7 +496,7 @@ export class QuizManager {
       `;
 
     return `
-          <div class="vocab-card multiple-choice-quiz"  data-quiz-id="${quizId}">
+          <div class="vocab-card multiple-choice-quiz" data-quiz-id="${quizId}">
             <div class="question-area">
               ${questionHTML}
             </div>
@@ -425,11 +509,75 @@ export class QuizManager {
   }
 
   /**
+   * Tạo bàn phím từ Từ vựng (viết hoa, không trùng, xáo trộn)
+   * @param {String} word - Từ vựng
+   * @returns {String} HTML các ký tự
+   */
+  getSpellCharsHTML(word) {
+    const seen = new Set();
+    const uniqueChars = word
+      .toUpperCase()
+      .split("")
+      .map((char) => (char === " " ? "⎵" : char))
+      .filter((char) => {
+        if (seen.has(char)) return false;
+        seen.add(char);
+        return true;
+      });
+
+    // Xáo trộn mảng
+    for (let i = uniqueChars.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [uniqueChars[i], uniqueChars[j]] = [uniqueChars[j], uniqueChars[i]];
+    }
+
+    return uniqueChars
+      .map(
+        (char) =>
+          `<div class="spellcheck-char" data-char="${char}">${char}</div>`
+      )
+      .join("");
+  }
+
+  /**
    * Tạo quiz spell check
    * @param {Object} wordData - Dữ liệu từ vựng
    */
   getSpellHTML(wordData, quizId = 1) {
-    // TODO
+    return `
+    <div class="vocab-card spellcheck-quiz" data-quiz-id="${quizId}">
+        <div class="question-area">
+          <label class="vocab-label">Câu hỏi</label>
+          <div class="question-text word-text">${wordData.meaning}</div>
+        </div>
+        <label class="vocab-label">Đáp án</label>
+        <div class="answer-area">
+          <div
+            class="answer-text"
+            data-vocab="Goodbye world"
+            placeholder="Nhập từ đúng"
+            contenteditable="false"
+            data-word="${wordData.word}"
+          ></div>
+          <button class="input-del-btn" title="backspace">
+            <i class="fa-solid fa-delete-left"></i>
+          </button>
+        </div>
+        <label class="vocab-label">Gõ để nhập thành từ đúng</label>
+        <div class="spellcheck-container">
+          ${this.getSpellCharsHTML(wordData.word)}
+        </div>
+
+        <div class="spellcheck-button">
+          <button class="spellcheck-check-btn" title="Kiểm tra">
+            <i class="fas fa-check-circle"></i> Kiểm tra
+          </button>
+          <button class="spellcheck-hint-btn" title="Gợi ý">
+            <i class="fa-solid fa-wand-magic-sparkles"></i> Gợi ý
+          </button>
+        </div>
+      </div>
+    `;
   }
 
   /**

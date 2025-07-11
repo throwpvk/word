@@ -854,16 +854,12 @@ svg path {
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
   cursor: pointer;
   color: #403d39;
+  background-color: var(--color-correct);
+  font-weight: 600;
 }
 
 .spellcheck-hint-btn {
   border: 2px var(--color-default-content) solid;
-}
-
-.spellcheck-check-btn {
-  background-color: var(--color-correct);
-}
-.spellcheck-hint-btn {
   background-color: var(--color-default);
 }
 
