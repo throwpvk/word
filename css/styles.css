@@ -49,7 +49,9 @@ body {
 }
 
 body.no-scroll {
-  overflow: hidden;
+  overflow-y: scroll;
+  position: fixed;
+  width: 100%;
 }
 
 /* Header */
