@@ -128,7 +128,7 @@ export class LessonManager {
 
     // Truyền từ vựng sang QuizManager nếu có
     if (window.vocabApp && window.vocabApp.quizManager) {
-      window.vocabApp.quizManager.setAllWords(lessonWords);
+      window.vocabApp.quizManager.setLessonWords(lessonWords);
     }
   }
 
