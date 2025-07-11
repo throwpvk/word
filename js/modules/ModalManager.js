@@ -67,6 +67,7 @@ export class ModalManager {
       // Sử dụng getIntroHTML từ QuizManager để render nội dung
       const quizManager = new QuizManager();
       this.modalBody.innerHTML = quizManager.getIntroHTML(wordData);
+      quizManager.bindAudioBtnEvent();
     }
     this.show();
   }
