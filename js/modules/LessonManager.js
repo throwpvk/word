@@ -59,7 +59,7 @@ export class LessonManager {
         start + Math.min(this.wordsPerLesson, this.words.length - start);
       btn.className = "lesson-circle-btn";
       btn.dataset.index = i;
-      btn.innerText = `${start} - ${end}`;
+      btn.innerText = `${start + 1} - ${end}`;
 
       btn.onclick = () => this.loadLessonData(i);
       DOM.lessonGrid.appendChild(btn);
@@ -98,14 +98,18 @@ export class LessonManager {
     if (DOM.vocabMain) {
       DOM.vocabMain.innerHTML = `
         <div class="lesson-header">
-          <div class="lesson-title"><span class="lesson-number">${start} - ${end}</span></div>
+          <div class="lesson-title"><span class="lesson-number">${
+            start + 1
+          } - ${end}</span></div>
           <div class="lesson-progress-bar">
             <div class="progress-label">Đã học: ${percent}%</div>
             <div class="lesson-progress" style="--lesson-progress: ${percent}%"></div>
           </div>
           <div class="lesson-actions">
             <button class="lesson-btn review-btn">Ôn tập</button>
-            <button class="lesson-btn new-btn">Học mới</button>
+            <button class="lesson-btn new-btn" data-start="${
+              start + 1
+            }" >Học mới</button>
             <button class="lesson-btn skip-btn">Bỏ qua</button>
           </div>
         </div>
@@ -129,6 +133,7 @@ export class LessonManager {
     // Truyền từ vựng sang QuizManager nếu có
     if (window.vocabApp && window.vocabApp.quizManager) {
       window.vocabApp.quizManager.setLessonWords(lessonWords);
+      window.vocabApp.quizManager.bindQuizBtnEvent();
     }
   }
 

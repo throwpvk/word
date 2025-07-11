@@ -32,9 +32,9 @@ export class FooterManager {
     DOM.h1?.addEventListener("pointerup", () => {
       const status = this.testCount % 3;
       if (status === 0) {
-        this.showFooter("correct", "Chính xác. Tuyệt vời!");
+        this.showFooter("correct");
       } else if (status === 1) {
-        this.showFooter("wrong", "Sai mất rồi. Cố gắng chút nữa!");
+        this.showFooter("wrong");
       } else {
         this.showFooter("", "");
       }
@@ -43,11 +43,11 @@ export class FooterManager {
 
     // Test elements (có thể xóa sau)
     DOM.vocabLabel?.addEventListener("pointerup", () => {
-      this.showFooter("correct", "Chính xác. Tuyệt vời!");
+      this.showFooter("correct");
     });
 
     DOM.progressBar?.addEventListener("pointerup", () => {
-      this.showFooter("wrong", "Sai mất rồi. Cố gắng chút nữa!");
+      this.showFooter("wrong");
     });
 
     DOM.vocabExample?.addEventListener("pointerup", () => {
@@ -60,7 +60,12 @@ export class FooterManager {
    * @param {string} type - Loại thông báo (correct/wrong/empty)
    * @param {string} text - Nội dung thông báo
    */
-  showFooter(type, text) {
+  showFooter(type) {
+    const text =
+      type === "correct"
+        ? "Chính xác. Tuyệt vời!"
+        : "Sai mất rồi. Cố gắng chút nữa!";
+
     if (!DOM.footerBar || !DOM.footerStatus) return;
 
     DOM.footerBar.className = `footer-bar show ${type}`;

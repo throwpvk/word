@@ -9,9 +9,13 @@ export class QuizManager {
   constructor() {
     this.words = [];
     this.currentLessonWords = [];
+    this.isEnableAudioQuiz = true;
+    this.isEnableSpellQuiz = true;
     this.currentQuizIndex = 0;
     this.wordsPerSesssion = 5;
     this.audioInstance = null;
+    this.currentNewLearnStartId = 0;
+    this.currentNewLearnPhase = 1;
     this.init();
   }
 
@@ -55,7 +59,7 @@ export class QuizManager {
         DOM.vocabMain.innerHTML = this.getQuizHTMLByType(
           1,
           2,
-          this.QUIZ_TYPES.SPELL
+          Math.floor(Math.random() * 5) + 1
         );
         this.bindQuizBtnEvent();
       });
@@ -79,6 +83,9 @@ export class QuizManager {
     answer.textContent += char === "⎵" ? " " : char;
   };
 
+  /**
+   * Xử lý sự kiện nhấn nút del trong bài quiz spell
+   */
   delBtnHandler = (e) => {
     const vocabMain = e.currentTarget.closest(".vocab-main");
     const answer = vocabMain.querySelector(".answer-text");
@@ -91,6 +98,9 @@ export class QuizManager {
     answer.textContent = text;
   };
 
+  /**
+   * Xử lý sự kiện nhấn nút gợi ý trong bài quiz spell
+   */
   hintBtnHandler = (e) => {
     const vocabMain = e.currentTarget.closest(".vocab-main");
     const answer = vocabMain.querySelector(".answer-text");
@@ -113,24 +123,59 @@ export class QuizManager {
   };
 
   /**
+   * Xử lý sự kiện nhấn nút Học mới
+   */
+  newLearnHandler = (e) => {
+    if (this.currentNewLearnStartId < e.currentTarget.dataset.start) {
+      this.currentNewLearnStartId = e.currentTarget.dataset.start;
+    }
+
+    const start = Number(this.currentNewLearnStartId);
+
+    if (this.currentNewLearnPhase === this.LEARN_PHASE.LEARN) {
+      const wordIds = [start, start + 1, start + 2, start + 3, start + 4];
+      const quizzes = this.getQuizOrder(wordIds, this.LEARN_PHASE.LEARN);
+      console.log(quizzes);
+      // TODO
+    }
+  };
+  /**
    * Xử lý sự kiện nhấn nút Kiểm tra trong bài quiz spell
    */
   spellCheckBtnHandler = (e) => {
     const vocabMain = e.currentTarget.closest(".vocab-main");
     const answer = vocabMain.querySelector(".answer-text");
     const word = answer.dataset.word;
-
+    let isCorrect = false;
     if (word.toLowerCase() === answer.textContent.toLowerCase()) {
-      window.vocabApp.footerManager.showFooter(
-        "correct",
-        "Chính xác. Tuyệt vời!"
-      );
+      isCorrect = true;
+      window.vocabApp.footerManager.showFooter("correct");
     } else {
-      window.vocabApp.footerManager.showFooter(
-        "wrong",
-        "Sai mất rồi. Cố gắng chút nữa!"
-      );
+      window.vocabApp.footerManager.showFooter("wrong");
     }
+    // TODO
+  };
+
+  /**
+   * Xử lý sự kiện nhấn chọn kết quả trong bài quiz spell
+   */
+  choiceCheckHandler = (e) => {
+    const vocaMain = e.currentTarget.closest(".vocab-main");
+    const choices = vocaMain.querySelectorAll(".choice");
+    const result = e.currentTarget.dataset.result;
+    const isCorrect = result === "correct";
+
+    e.currentTarget.classList.add(`${isCorrect ? "correct" : "wrong"}`);
+    choices.forEach((choice) => {
+      if (choice.dataset.result === "correct") {
+        choice.classList.add("correct");
+      }
+      choice.removeEventListener("pointerup", this.choiceCheckHandler);
+      choice.classList.add("chosen");
+    });
+
+    // TODO
+    window.vocabApp.footerManager.showFooter(result);
   };
 
   /**
@@ -160,6 +205,16 @@ export class QuizManager {
     document.querySelectorAll(".spellcheck-hint-btn").forEach((btn) => {
       btn.removeEventListener("pointerup", this.hintBtnHandler);
       btn.addEventListener("pointerup", this.hintBtnHandler);
+    });
+
+    document.querySelectorAll(".choice").forEach((btn) => {
+      btn.removeEventListener("pointerup", this.choiceCheckHandler);
+      btn.addEventListener("pointerup", this.choiceCheckHandler);
+    });
+
+    document.querySelectorAll(".new-btn").forEach((btn) => {
+      btn.removeEventListener("pointerup", this.newLearnHandler);
+      btn.addEventListener("pointerup", this.newLearnHandler);
     });
   }
 
@@ -470,7 +525,9 @@ export class QuizManager {
       .join("\n");
 
     const hasAudio =
-      wordData.details?.audioSrc && wordData.details.audioSrc !== "";
+      wordData.details?.audioSrc &&
+      wordData.details.audioSrc !== "" &&
+      this.isEnableAudioQuiz;
     const questionHTML = hasAudio
       ? `
             <label class="vocab-label">Nhấn để nghe</label>
@@ -544,6 +601,10 @@ export class QuizManager {
    * @param {Object} wordData - Dữ liệu từ vựng
    */
   getSpellHTML(wordData, quizId = 1) {
+    if (!this.isEnableSpellQuiz) {
+      return this.getViToEnHTML(wordData, quizId);
+    }
+
     return `
     <div class="vocab-card spellcheck-quiz" data-quiz-id="${quizId}">
         <div class="question-area">
@@ -612,18 +673,16 @@ export class QuizManager {
    * Tạo thứ tự quiz
    * @param {Array} wordIds - Dữ liệu từ vựng
    * @param {Number} phase - Phiên học, 1; learn, 2: practice
-   * @param {Boolean} hasAudio - Có bật chế độ quiz với audio hay không
-   * @param {Boolean} hasSpell - Có bật chế độ quiz với spell check hay không
    */
-  getQuizOrder(wordIds, phase, hasAudio = true, hasSpell = true) {
+  getQuizOrder(wordIds, phase) {
     const ids = wordIds;
     let quizId = 1;
 
     // Hàm hỗ trợ chọn quizType tùy theo điều kiện
     const choose = (type) => {
-      if (type === this.QUIZ_TYPES.AUDIO && !hasAudio)
+      if (type === this.QUIZ_TYPES.AUDIO && !this.isEnableAudioQuiz)
         return this.QUIZ_TYPES.ENTOVI;
-      if (type === this.QUIZ_TYPES.SPELL && !hasSpell)
+      if (type === this.QUIZ_TYPES.SPELL && !this.isEnableSpellQuiz)
         return this.QUIZ_TYPES.ENTOVI;
       return type;
     };
