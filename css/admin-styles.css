@@ -1,0 +1,1427 @@
+:root {
+    /* Phần màu sắc thay đổi khi đổi giao diện đêm/ngày */
+    /* Ngày */
+    --color-bg: #fff8e5;
+    --color-bg-panel: #fdf3d7;
+    --color-text: #403d39;
+  
+    /* Đêm */
+    /* --color-bg: #3c3d37;
+    --color-bg-panel: #1e201e;
+    --color-text: #ecdfcc; */
+  
+    /* Phần màu sắc cố định */
+    --color-text-light: #fff8e5;
+    --color-secondary: #888888;
+  
+    /* --color-correct: #9ae6b4;
+    --color-correct-content: #43c282;
+    --color-wrong: #feb2b2;
+    --color-wrong-content: #c73c3c;
+    --color-default: #ffca58;
+    --color-default-content: #f0ad4e; */
+  
+    --color-correct: #a8e6a3;
+    --color-correct-content: #3dbf6e;
+    --color-wrong: #feb2b2;
+    --color-wrong-content: #e04848;
+    --color-default: #ffe87c;
+    --color-default-content: #e8b42f;
+  }
+  
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  body {
+    font-family: "Open Sans", -apple-system, BlinkMacSystemFont, "Segoe UI",
+      sans-serif;
+    font-size: 16px;
+    line-height: 1.6;
+    color: var(--color-text);
+    overflow-x: hidden;
+    text-align: justify;
+    background-color: var(--color-bg);
+    user-select: none;
+    font-weight: 500;
+  }
+  
+  body.no-scroll {
+    overflow-y: scroll;
+    position: fixed;
+    width: 100%;
+  }
+  
+  /* Header */
+  .header-bar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 70px;
+    background: var(--color-bg-panel);
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding: 13px 16px;
+    z-index: 8500;
+  }
+  
+  .header-bar h1 {
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--color-text);
+    text-align: center;
+    flex-grow: 1;
+  }
+  
+  .header-bar .progress-bar {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 6px;
+    width: 100%;
+    background: linear-gradient(
+      to right,
+      var(--color-correct-content) var(--progress),
+      var(--color-correct, #ddd) var(--progress)
+    );
+    transition: background 0.5s ease;
+  }
+  
+  .menu-btn,
+  .settings-btn {
+    background: transparent;
+    border: none;
+    color: var(--color-text);
+    font-size: 30px;
+    cursor: pointer;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    transition: all 0.5s ease;
+  }
+  
+  /* Panels */
+  .menu-panel,
+  .settings-panel {
+    position: fixed;
+    top: 70px;
+    bottom: 0;
+    width: 100vw;
+    background: var(--color-bg-panel);
+    transform: translateX(-100%);
+    transition: all 0.5s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    z-index: 9001;
+  }
+  .settings-panel {
+    padding: 22px;
+  }
+  .lesson-menu {
+    width: 100%;
+    height: 90vh;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-correct) transparent;
+    /* padding: 16px 22px 50vh; */
+  }
+  
+  .lesson-menu .level-item {
+    background-color: var(--color-bg);
+    margin: 10px;
+    border-radius: 16px;
+    color: var(--color-text);
+    padding: 12px 16px;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    border: 2px solid transparent;
+    transition: background-color 0.5s ease, box-shadow 0.5s ease,
+      transform 0.5s ease, border 0.5s ease;
+  }
+  
+  .lesson-menu .level-item:hover {
+    border: 2px solid var(--color-correct);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transform: translateY(-1px);
+  }
+  
+  .lesson-menu .level-item:active {
+    transform: scale(0.98);
+    border: 3px solid var(--color-correct);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .lesson-menu .level-item.active {
+    border: 2px solid var(--color-correct);
+  }
+  
+  .menu-btn {
+    position: fixed;
+    top: 0;
+    right: 0;
+    transform: translateX(120%) translateY(calc(-100% - 6px));
+    background-color: var(--color-bg-panel);
+    border-radius: 0 40% 40% 0;
+    height: 70px;
+    width: 50px;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 16px;
+    transition: all 0.5s ease 1s;
+  }
+  
+  .settings-btn {
+    position: fixed;
+    top: 0;
+    left: 0;
+    transform: translateX(-120%) translateY(calc(-100% - 6px));
+    background-color: var(--color-bg-panel);
+    border-radius: 40% 0 0 40%;
+    height: 70px;
+    width: 50px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 16px;
+    transition: all 0.5s ease 1s;
+  }
+  
+  .menu-panel.show,
+  .settings-panel.show {
+    transform: translateX(0);
+  }
+  
+  .menu-panel.show .menu-btn {
+    transform: translateX(0) translateY(calc(-100% - 6px));
+    border-radius: 0;
+    width: 100%;
+    justify-content: flex-start;
+    padding: 20px;
+    box-shadow: 4px 0 12px rgba(0, 0, 0, 0.08);
+  }
+  
+  .settings-panel.show .settings-btn {
+    transform: translateX(0) translateY(calc(-100% - 6px));
+    border-radius: 0;
+    width: 100%;
+    justify-content: flex-end;
+    padding: 20px;
+    box-shadow: -4px 0 12px rgba(0, 0, 0, 0.08);
+  }
+  
+  .settings-panel {
+    right: 0;
+    transform: translateX(100%);
+    z-index: 9002;
+  }
+  
+  .menu-panel h2,
+  .settings-panel h2 {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--color-text);
+    text-align: left;
+    padding: 10px 22px;
+    width: 60%;
+    height: 70px;
+    position: absolute;
+    top: -3px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-100%);
+    pointer-events: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .menu-panel nav ul {
+    list-style: none;
+  }
+  
+  /* Main Content */
+  .vocab-main {
+    margin: 70px auto 0;
+    padding: 20px;
+    max-width: 100%;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    min-height: calc(100vh - 70px);
+    overflow: hidden;
+    background: var(--color-bg);
+  }
+  
+  .vocab-card {
+    text-align: left;
+    transition: all 0.5s ease;
+    max-width: 100%;
+    width: 100%;
+  }
+  
+  .vocab-label {
+    font-size: 14px;
+    color: var(--color-secondary);
+    display: block;
+    margin-bottom: 5px;
+  }
+  
+  .word-text {
+    font-weight: 700;
+    color: var(--color-text);
+    display: inline-block;
+    align-items: center;
+    gap: 16px;
+    position: relative;
+    margin-bottom: 16px;
+  }
+  
+  .vocab-meaning {
+    color: var(--color-text);
+    margin-bottom: 16px;
+    padding-bottom: 20px;
+    border-bottom: 3px var(--color-correct) solid;
+  }
+  
+  .vocab-type {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-correct);
+    color: #403d39;
+    border-radius: 12px;
+    /* width: 80px; */
+    height: 40px;
+    font-weight: 500;
+    padding: 0 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border: 2px var(--color-correct-content) solid;
+    cursor: pointer;
+    transition: all 0.5s ease;
+  }
+  
+  .vocab-type:hover {
+    opacity: 0.5;
+  }
+  
+  .vocab-type:active {
+    opacity: 0.8;
+  }
+  
+  .vocab-pronun {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-wrong);
+    color: #403d39;
+    border-radius: 12px;
+    padding: 0px 15px;
+    height: 40px;
+    /* font-family: "Charis SIL", serif; */
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.5s ease;
+    font-size: 16px;
+  }
+  
+  .vocab-example {
+    padding-left: 10px;
+    border-left: 4px solid var(--color-wrong);
+    margin-bottom: 16px;
+  }
+  
+  .example {
+    color: var(--color-text);
+    margin-bottom: 10px;
+    font-weight: 600;
+  }
+  
+  .example span {
+    color: var(--color-correct-content);
+    background-color: var(--color-correct);
+    padding: 0px 3px;
+    border-radius: 6px;
+    font-weight: 700;
+  }
+  
+  .example-translation {
+    color: var(--color-secondary);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+    font-style: italic;
+    font-weight: 500;
+  }
+  
+  .vocab-sub-item {
+    display: flex;
+    justify-content: flex-start;
+    gap: 15px;
+    align-items: center;
+    margin-bottom: 10px;
+  }
+  
+  .audio-btn {
+    background: var(--color-default);
+    border: none;
+    border-radius: 12px;
+    padding: 0 17px;
+    width: 60px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border: 2px var(--color-default-content) solid;
+  }
+  
+  svg path {
+    fill: #403d39;
+  }
+  
+  /* Footer Panel */
+  .footer-bar {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 150px;
+    visibility: hidden;
+    opacity: 0;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    z-index: 8000;
+    transform: translateY(100%);
+  }
+  
+  .footer-bar.show {
+    display: flex;
+    transform: translateY(0);
+    max-width: 100%;
+    background-color: var(--color-default);
+    visibility: visible;
+    opacity: 1;
+    transition: all 0.5s ease;
+  }
+  
+  .footer-bar.correct {
+    background: var(--color-correct);
+  }
+  
+  .footer-bar.wrong {
+    background: var(--color-wrong);
+  }
+  
+  .footer-button-container {
+    display: flex;
+    /* align-items: center; */
+    justify-content: center;
+    align-items: flex-start;
+    padding-top: 40px;
+    width: 100%;
+    height: 100%;
+    position: relative;
+  }
+  
+  .footer-status {
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 8px 16px;
+    font-size: 16px;
+    font-weight: 700;
+    background: none;
+    box-shadow: none;
+  }
+  
+  .footer-bar.correct .footer-status {
+    color: var(--color-correct-content);
+  }
+  
+  .footer-bar.wrong .footer-status {
+    color: var(--color-wrong-content);
+  }
+  
+  .footer-bar.correct .footer-next {
+    background: var(--color-correct-content);
+  
+    border: 2px black solid;
+  }
+  
+  .footer-bar.wrong .footer-next {
+    background: var(--color-wrong-content);
+  }
+  
+  .footer-next {
+    background: var(--color-default-content);
+    color: #403d39;
+    border: none;
+    padding: 20px 115px 20px 100px;
+    border-radius: 16px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.5s ease;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border: 2px black solid;
+  }
+  
+  .word-text {
+    font-size: clamp(28px, 4.2vw, 40px);
+  }
+  
+  .vocab-meaning {
+    font-size: clamp(20px, 3.2vw, 32px);
+  }
+  
+  .vocab-type span {
+    font-size: clamp(16px, 2.2vw, 20px);
+  }
+  
+  .example,
+  .example-translation {
+    font-size: clamp(16px, 1.8vw, 18px);
+  }
+  
+  .footer-next {
+    font-size: clamp(20px, 3.2vw, 26px);
+  }
+  
+  /* hiệu ứng */
+  .footer-next,
+  .menu-btn,
+  .settings-btn,
+  .audio-btn,
+  .example-audio {
+    transition: opacity 0.5s ease;
+  }
+  
+  /* Hover: sáng + bóng nhẹ */
+  .footer-next:hover,
+  .menu-btn:hover,
+  .settings-btn:hover,
+  .audio-btn:hover,
+  .example-audio:hover {
+    opacity: 0.5;
+  }
+  
+  /* Active: tối nhẹ và bóng chìm xuống */
+  .footer-next:active,
+  .menu-btn:active,
+  .settings-btn:active,
+  .audio-btn:active,
+  .example-audio:active {
+    opacity: 0.8;
+  }
+  
+  .menu-btn:hover,
+  .settings-btn:hover {
+    opacity: 1;
+  }
+  
+  .menu-btn:active,
+  .settings-btn:active {
+    opacity: 1;
+  }
+  
+  .menu-btn:hover i,
+  .settings-btn:hover i {
+    opacity: 0.5;
+  }
+  
+  .menu-btn:active i,
+  .settings-btn:active i {
+    opacity: 0.8;
+  }
+  
+  /* Cài đặt giao diện khối và dropdown */
+  .setting-group {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .setting-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--color-bg);
+    color: var(--color-text);
+    border-radius: 16px;
+    padding: 12px 16px;
+    cursor: pointer;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
+    transition: background-color 0.5s ease, box-shadow 0.5s ease;
+  }
+  
+  .setting-item:hover {
+    opacity: 0.5;
+  }
+  
+  .setting-item:active {
+    opacity: 0.8;
+  }
+  
+  .setting-dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 120px;
+    background-color: var(--color-bg);
+    border-radius: 16px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+    z-index: 100;
+    flex-direction: column;
+    overflow: hidden;
+    margin-top: 12px;
+  }
+  
+  .setting-dropdown div {
+    padding: 12px 36px 12px 12px; /* chừa chỗ bên phải cho icon */
+    cursor: pointer;
+    transition: background 0.2s;
+    color: var(--color-text);
+    position: relative;
+    text-align: left;
+  }
+  
+  .light-mode-selector,
+  .dark-mode-selector {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+    color: var(--color-text);
+  }
+  .setting-dropdown div:hover {
+    opacity: 0.5;
+  }
+  
+  .setting-dropdown div:active {
+    opacity: 0.8;
+  }
+  
+  .setting-dropdown i {
+    color: var(--color-text);
+  }
+  
+  /* Menu */
+  .menu-panel nav ul li {
+    display: block;
+    padding: 10px 16px;
+    text-decoration: none;
+    color: var(--color-text);
+    transition: all 0.5s ease;
+    cursor: pointer;
+  }
+  
+  .menu-panel nav ul li.active {
+    color: var(--color-correct-content);
+    font-size: 20px;
+  }
+  
+  .menu-panel nav ul li ul li {
+    transition: all 0.5s ease;
+  }
+  
+  .menu-panel nav ul li ul li.active {
+    font-weight: normal;
+    color: var(--color-correct-content);
+    font-size: 17px;
+  }
+  
+  .lesson-menu .sub-menu {
+    list-style: none;
+    padding-left: 20px;
+    margin-top: 4px;
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: max-height 0.5s ease, opacity 0.5s ease;
+  }
+  
+  .lesson-menu .sub-menu li {
+    padding: 10px 12px;
+    font-size: 16px;
+    color: var(--color-text);
+    cursor: pointer;
+  }
+  
+  .lesson-menu .sub-menu li:hover {
+    opacity: 0.6;
+  }
+  
+  /* Khi mở sub-menu */
+  .lesson-menu > li.level-item.active > .sub-menu {
+    max-height: 500px;
+    opacity: 1;
+  }
+  
+  /* Danh cho màn hình quiz */
+  /* Trắc nghiệm */
+  .question-area {
+    margin-bottom: 16px;
+  }
+  .question-text {
+    margin: 0px;
+    line-height: 1.2;
+  }
+  .choices-area {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  .choices-area .choice {
+    width: 100%;
+    border: 0;
+    margin: 5px;
+    background-color: var(--color-bg-panel);
+    border: 2px var(--color-secondary) solid;
+    border-radius: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 16px 10px;
+    max-width: 700px;
+    font-size: clamp(18px, 2.2vw, 24px);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+    white-space: normal;
+    word-break: break-word;
+    line-height: 1.2;
+    font-weight: 600;
+    cursor: pointer;
+  }
+  
+  .choices-area .choice.wrong {
+    background-color: var(--color-wrong);
+    border: 2px var(--color-wrong-content) solid;
+    color: #403d39;
+  }
+  
+  .choices-area .choice.correct {
+    background-color: var(--color-correct);
+    border: 2px var(--color-correct-content) solid;
+    color: #403d39;
+  }
+  
+  .choices-area .choice:hover {
+    opacity: 0.5;
+  }
+  
+  .choices-area .choice:active {
+    opacity: 0.8;
+  }
+  
+  .choices-area .choice.chosen {
+    opacity: 0.8;
+  }
+  
+  .choices-area .choice.chosen:hover {
+    opacity: 0.8;
+  }
+  
+  .choices-area .choice.chosen:active {
+    opacity: 0.8;
+  }
+  
+  .question-audio-btn {
+    width: 80px;
+    height: 50px;
+    padding: 12px 24px;
+    margin: 0 auto;
+    border-radius: 16px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  }
+  
+  .spellcheck-quiz {
+    width: 100%;
+    /* padding: 16px; */
+  }
+  
+  .answer-area {
+    width: 100%;
+    margin: 0 auto 20px;
+    position: relative;
+    display: flex;
+    gap: 5px;
+    word-break: break-word;
+  }
+  
+  .answer-text {
+    flex: 1;
+    text-align: left !important;
+    padding: 10px 8px;
+    border: 2px var(--color-correct) solid;
+    border-radius: 12px;
+    background-color: var(--color-bg-panel);
+    font-size: 18px;
+    font-weight: bold;
+    pointer-events: none;
+    line-height: 1.2;
+  }
+  .input-del-btn {
+    width: 50px;
+    height: 47px;
+    border: 2px var(--color-wrong-content) solid;
+    background-color: var(--color-wrong);
+    border-radius: 12px;
+    font-size: 22px;
+    color: #403d39;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-right: 0.2rem;
+  }
+  
+  .spellcheck-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+    gap: 8px;
+    padding: 20px 15px;
+    border: 2px var(--color-correct) dashed;
+    border-radius: 16px;
+    width: 100%;
+    margin: 0 auto 16px;
+  }
+  
+  .spellcheck-container .spellcheck-char {
+    position: relative;
+    user-select: none;
+    font-weight: bold;
+    background-color: var(--color-bg-panel);
+    border: 2px var(--color-secondary) solid;
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    transition: all 0.5s ease;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08);
+    cursor: pointer;
+  }
+  
+  .spellcheck-char::after {
+    content: attr(data-char);
+    position: absolute;
+    top: -52px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: var(--color-bg-panel);
+    border-radius: 12px;
+    width: 80px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    font-size: 28px;
+    font-weight: bold;
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.08);
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    z-index: 10;
+  }
+  
+  .spellcheck-char:active::after {
+    opacity: 1;
+    visibility: visible;
+  }
+  
+  .spellcheck-container .spellcheck-char:hover {
+    border: 2px var(--color-correct-content) solid;
+  }
+  
+  .spellcheck-container .spellcheck-char:active {
+    border: 2px var(--color-correct-content) solid;
+    background-color: var(--color-correct);
+  }
+  
+  .spellcheck-button {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+  }
+  
+  .spellcheck-check-btn,
+  .spellcheck-hint-btn {
+    border-radius: 16px;
+    font-size: 16px;
+    padding: 12px 16px;
+    border: 2px var(--color-correct-content) solid;
+    transition: all 0.5s ease;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    cursor: pointer;
+    color: #403d39;
+    background-color: var(--color-correct);
+    font-weight: 600;
+  }
+  
+  .spellcheck-hint-btn {
+    border: 2px var(--color-default-content) solid;
+    background-color: var(--color-default);
+  }
+  
+  .spellcheck-check-btn:hover,
+  .spellcheck-hint-btn:hover,
+  .input-del-btn:hover {
+    opacity: 0.5;
+  }
+  
+  .spellcheck-check-btn:active,
+  .spellcheck-hint-btn:active,
+  .input-del-btn:active {
+    opacity: 0.8;
+  }
+  
+  /* Grid cho lesson-circle-btn (responsive, không cố định số cột) */
+  .lesson-container {
+    width: 100%;
+    height: 100%;
+    overflow-y: scroll;
+    padding-bottom: 30vh;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-correct) transparent;
+  }
+  
+  .lesson-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+    gap: 16px;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 26px;
+    background: var(--color-bg-panel);
+    margin: 0 auto;
+    width: 100%;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-correct) transparent;
+  }
+  
+  .lesson-grid::-webkit-scrollbar {
+    width: 8px;
+    background: #eee;
+    border-radius: 8px;
+  }
+  .lesson-grid::-webkit-scrollbar-thumb {
+    background: var(--color-default);
+    border-radius: 8px;
+  }
+  
+  .lesson-circle-btn {
+    width: 100%;
+    aspect-ratio: 2 / 1;
+    border-radius: 16px;
+    background: var(--color-secondary);
+    color: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    border: 3px solid #e0e3e9;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.5s ease;
+    outline: none;
+    position: relative;
+    user-select: none;
+  }
+  
+  .lesson-circle-btn.finished {
+    background: var(--color-default);
+    color: #222;
+    border-color: var(--color-default-content);
+    box-shadow: 0 4px 16px rgba(255, 202, 88, 0.18);
+  }
+  
+  .lesson-circle-btn.current {
+    background: var(--color-correct);
+    color: #222;
+    border-color: var(--color-correct-content);
+    box-shadow: 0 4px 16px rgba(168, 230, 163, 0.18);
+  }
+  
+  .lesson-circle-btn:not(.finished):not(.current) {
+    background: var(--color-bg);
+    color: var(--color-text);
+    border: 2px var(--color-secondary) solid;
+  }
+  
+  .lesson-circle-btn:hover,
+  .lesson-circle-btn:focus {
+    opacity: 0.7;
+    z-index: 2;
+  }
+  .lesson-circle-btn.active {
+    outline: 2px solid var(--color-default-content);
+    outline-offset: 2px;
+    z-index: 3;
+  }
+  
+  /* Overlay cho lesson */
+  .lesson-overlay {
+    display: none;
+    position: fixed;
+    top: 70px;
+    left: 0;
+    width: 100vw;
+    height: calc(100vh - 70px);
+    background: rgba(0, 0, 0, 0.18);
+    z-index: 9999;
+    align-items: center;
+    justify-content: center;
+  }
+  .lesson-overlay .overlay-content {
+    background: var(--color-bg-panel);
+    border-radius: 24px;
+    padding: 48px 64px;
+    font-size: 2rem;
+    color: var(--color-text);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+    min-width: 320px;
+    text-align: center;
+  }
+  
+  /* Header cho bài học */
+  .lesson-header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 16px;
+  }
+  .lesson-title {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--color-text);
+  }
+  .lesson-number {
+    color: var(--color-text);
+    font-size: 2.2rem;
+    font-weight: 800;
+  }
+  .lesson-actions {
+    display: flex;
+    gap: 18px;
+    margin: 10px 0;
+  }
+  .lesson-btn {
+    padding: 10px 16px;
+    border-radius: 14px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    background: var(--color-default);
+    color: #403d39;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+    border: 2px solid var(--color-default-content);
+    transition: all 0.5s ease;
+  }
+  .lesson-btn.new-btn {
+    background: var(--color-correct);
+    border-color: var(--color-correct-content);
+  }
+  .lesson-btn.review-btn {
+    background: var(--color-default);
+    border-color: var(--color-default-content);
+  }
+  .lesson-btn.skip-btn {
+    background: var(--color-wrong);
+    border-color: var(--color-wrong-content);
+  }
+  .lesson-btn:hover {
+    opacity: 0.7;
+  }
+  
+  /* Bảng từ vựng */
+  .lesson-table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--color-bg-panel);
+    border-radius: 18px;
+    overflow: hidden;
+    box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+  }
+  .lesson-table th,
+  .lesson-table td {
+    padding: 8px;
+    text-align: left;
+    font-size: 14px;
+  }
+  .lesson-table th {
+    background: var(--color-secondary);
+    color: var(--color-text-light);
+    font-weight: 700;
+  }
+  .lesson-table tr:nth-child(even) td {
+    background: var(--color-bg);
+  }
+  .lesson-table tr:nth-child(odd) td {
+    background: var(--color-bg-panel);
+  }
+  .lesson-table td {
+    color: var(--color-text);
+    border-bottom: 1px solid var(--color-secondary);
+  }
+  .lesson-table tr:last-child td {
+    border-bottom: none;
+  }
+  
+  .word-info-btn {
+    background: transparent;
+    border: none;
+    font-size: 18px;
+    color: var(--color-secondary);
+    cursor: pointer;
+  }
+  
+  body > main > table > tbody > tr > td:nth-child(4):hover .word-info-btn {
+    opacity: 0.5;
+  }
+  
+  body > main > table > tbody > tr > td:nth-child(4):active .word-info-btn {
+    opacity: 0.8;
+  }
+  
+  body > main > table > tbody > tr > td:nth-child(4) {
+    text-align: right;
+    padding: 8px 14px;
+    width: 0px;
+    cursor: pointer;
+  }
+  body > main > table > tbody > tr > td:nth-child(1),
+  body > main > table > thead > tr > th:nth-child(1) {
+    text-align: center;
+    width: 0px;
+    font-size: 14px;
+  }
+  
+  /* Progress bar cho bài học */
+  .lesson-progress-bar {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+  }
+  .progress-label {
+    font-size: 1rem;
+    color: var(--color-secondary);
+    font-weight: 600;
+    margin-bottom: 2px;
+  }
+  
+  .lesson-progress {
+    height: 16px;
+    width: 100%;
+    border-radius: 999px;
+    border: 2px var(--color-default-content) solid;
+    background: linear-gradient(
+      to right,
+      var(--color-default-content) var(--lesson-progress),
+      var(--color-default, #ddd) var(--lesson-progress)
+    );
+    transition: background 0.5s ease;
+  }
+  
+  /* ========== Modal UI cho chi tiết từ vựng ========== */
+  .modal {
+    position: fixed;
+    z-index: 9999;
+    left: 0;
+    top: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(30, 32, 40, 0.85); /* overlay tối hơn */
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.5s ease;
+    padding-top: 70px;
+  }
+  .modal-content {
+    background: var(--color-bg);
+    padding: 0;
+    border-radius: 16px;
+    width: 90%;
+    max-width: 600px;
+    height: 80%;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.18);
+    position: relative;
+    transition: all 0.5s ease;
+  }
+  
+  .modal-close {
+    position: absolute;
+    right: 0px;
+    top: -40px;
+    font-size: 2rem;
+    color: var(--color-text-light);
+    cursor: pointer;
+    transition: color 0.2s;
+    z-index: 2;
+    background: none;
+    border: none;
+  }
+  .modal-close:hover {
+    opacity: 0.5;
+  }
+  .modal-close:active {
+    opacity: 0.8;
+  }
+  
+  .modal-body {
+    width: 100%;
+    height: 100%;
+    color: var(--color-text);
+    font-size: 1.08rem;
+    padding: 16px 16px 0 16px;
+    overflow-y: scroll;
+    scrollbar-width: thin;
+    scrollbar-color: var(--color-correct) transparent;
+  }
+  .modal-body h2 {
+    margin-top: 0;
+    margin-bottom: 8px;
+    color: var(--color-primary);
+    font-weight: 700;
+  }
+  .modal-body p {
+    margin: 6px 0 4px 0;
+  }
+  .modal-body ul {
+    margin: 8px 0 0 18px;
+    padding: 0;
+    color: var(--color-text);
+    font-size: 1rem;
+  }
+  .modal-body li {
+    margin-bottom: 4px;
+    line-height: 1.5;
+  }
+  .modal-body audio {
+    margin: 8px 0 8px 0;
+    width: 100%;
+    outline: none;
+  }
+  
+  /* ========== ADMIN ========== */
+  .word-edit-btn {
+    background: transparent;
+    border: none;
+    font-size: 18px;
+    color: var(--color-default-content);
+    cursor: pointer;
+    transition: opacity 0.3s;
+  }
+  .word-edit-btn:hover {
+    opacity: 0.6;
+  }
+  .word-edit-btn:active {
+    opacity: 0.8;
+  }
+  
+  /* Modal edit từ vựng */
+  #editWordModal .modal-content {
+    max-width: 600px;
+    width: 98%;
+    padding: 0;
+    border-radius: 16px;
+    background: var(--color-bg);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+    position: relative;
+  }
+  #editWordModal .modal-body {
+    padding: 24px 18px 18px 18px;
+    overflow-y: auto;
+    max-height: 70vh;
+  }
+  #editWordModal form {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+  #editWordModal label {
+    font-weight: 600;
+    color: var(--color-text);
+    margin-bottom: 2px;
+  }
+  #editWordModal input,
+  #editWordModal textarea {
+    width: 100%;
+    padding: 7px 10px;
+    border-radius: 8px;
+    border: 1.5px solid var(--color-secondary);
+    font-size: 1rem;
+    color: var(--color-text);
+    background: var(--color-bg-panel);
+    margin-bottom: 4px;
+  }
+  #editWordModal .example-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 10px;
+  }
+  #editWordModal .example-table th,
+  #editWordModal .example-table td {
+    border: 1px solid var(--color-secondary);
+    padding: 6px 8px;
+    font-size: 1rem;
+  }
+  #editWordModal .example-table th {
+    background: var(--color-default);
+    color: var(--color-text);
+  }
+  #editWordModal .example-table td input {
+    margin-bottom: 0;
+  }
+  #editWordModal .example-action-btn {
+    background: var(--color-wrong);
+    color: var(--color-wrong-content);
+    border: none;
+    border-radius: 6px;
+    padding: 4px 10px;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-left: 2px;
+    transition: opacity 0.3s;
+  }
+  #editWordModal .example-action-btn.add {
+    background: var(--color-correct);
+    color: var(--color-correct-content);
+  }
+  #editWordModal .example-action-btn:hover {
+    opacity: 0.7;
+  }
+  #editWordModal .example-action-btn:active {
+    opacity: 0.9;
+  }
+  #editWordModal .modal-footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 18px;
+  }
+  #editWordModal .save-btn {
+    background: var(--color-correct);
+    color: var(--color-correct-content);
+    border: none;
+    border-radius: 8px;
+    padding: 8px 18px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.3s;
+  }
+  #editWordModal .delete-btn {
+    background: var(--color-wrong);
+    color: var(--color-wrong-content);
+    border: none;
+    border-radius: 8px;
+    padding: 8px 18px;
+    font-size: 1.1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: opacity 0.3s;
+  }
+  #editWordModal .save-btn:hover,
+  #editWordModal .delete-btn:hover {
+    opacity: 0.7;
+  }
+  #editWordModal .save-btn:active,
+  #editWordModal .delete-btn:active {
+    opacity: 0.9;
+  }
+  
+  @media (min-width: 768px) {
+    .menu-panel {
+      max-width: 400px;
+    }
+  
+    .settings-panel {
+      max-width: 400px;
+    }
+    .modal-content {
+      font-size: 0.98rem;
+      padding: 10px;
+    }
+  
+    .lesson-table th,
+    .lesson-table td,
+    body > main > table > tbody > tr > td:nth-child(1),
+    body > main > table > thead > tr > th:nth-child(1) {
+      font-size: 18px;
+    }
+  }
+  
+  /* Desktop Styles */
+  @media (min-width: 1280px) {
+    .menu-panel {
+      max-width: 400px;
+    }
+  
+    .settings-panel {
+      max-width: 400px;
+    }
+  
+    .vocab-main,
+    .footer-button-container {
+      margin-left: 400px;
+      margin-right: 400px;
+    }
+  
+    .menu-panel {
+      left: 0;
+    }
+  
+    .settings-panel {
+      right: 0;
+    }
+  
+    .lesson-table th,
+    .lesson-table td,
+    body > main > table > tbody > tr > td:nth-child(1),
+    body > main > table > thead > tr > th:nth-child(1) {
+      font-size: 20px;
+    }
+  }
+  
+  /* Accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    .menu-panel,
+    .settings-panel,
+    .vocab-card,
+    .audio-btn,
+    .example-audio,
+    .footer-next,
+    .menu-btn,
+    .settings-btn,
+    .footer-status,
+    .footer-bar {
+      transition: none;
+    }
+  }
+  

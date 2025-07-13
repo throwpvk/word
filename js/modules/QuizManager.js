@@ -346,7 +346,7 @@ export class QuizManager {
         console.log("✅ Audio phát thành công!");
       })
       .catch((e) => {
-        console.error("❌ Không thể phát audio:", e);
+        console.log("❌ Không thể phát audio:", e);
       });
   }
 

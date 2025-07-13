@@ -759,6 +759,7 @@ svg path {
   position: relative;
   display: flex;
   gap: 5px;
+  word-break: break-word;
 }
 
 .answer-text {

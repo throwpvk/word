@@ -99,7 +99,7 @@ export class DataRenderer {
         const details = await this.fetchWordDetails(item.word);
         item.details = details;
       } catch (err) {
-        console.error(`❌ Lỗi khi fetch từ "${item.word}":`, err.message);
+        console.log(`❌ Lỗi khi fetch từ "${item.word}":`, err.message);
         item.details = null;
       }
 

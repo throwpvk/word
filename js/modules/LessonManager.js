@@ -33,12 +33,28 @@ export class LessonManager {
    */
   async loadWords() {
     try {
+      // const response = await fetch("./words/toeicWords.json");
+      const response = await fetch("https://word-server.onrender.com/toeic");
+      this.words = await response.json();
+      // Truyền từ vựng sang QuizManager nếu có
+      if (window.vocabApp && window.vocabApp.quizManager) {
+        window.vocabApp.quizManager.setAllWords(this.words);
+      }
+    } catch (error) {
+      console.error("❌ Lỗi khi tải dữ liệu từ vựng:", error);
+      await this.loadLocalWords();
+    }
+  }
+
+  async loadLocalWords() {
+    try {
       const response = await fetch("./words/toeicWords.json");
       this.words = await response.json();
       // Truyền từ vựng sang QuizManager nếu có
       if (window.vocabApp && window.vocabApp.quizManager) {
         window.vocabApp.quizManager.setAllWords(this.words);
       }
+      console.log("Load Local Words thành công");
     } catch (error) {
       console.error("❌ Lỗi khi tải dữ liệu từ vựng:", error);
     }

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin Từ Vựng</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="../favicon_io/favicon-32x32.png"
+    />
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="16x16"
+      href="../favicon_io/favicon-16x16.png"
+    />
+    <link
+      rel="shortcut icon"
+      href="../favicon_io/favicon.ico"
+      type="image/x-icon"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.7.2/css/all.min.css"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+    <link rel="stylesheet" href="../css/admin-styles.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header-bar">
+      <h1>Admin Từ Vựng</h1>
+    </header>
+    <!-- Menu Panel (Left) -->
+    <aside class="menu-panel show">
+      <button class="menu-btn" title="Mở menu">
+        <i class="fas fa-bars"></i>
+      </button>
+      <h2>Nhóm từ vựng</h2>
+      <div class="lesson-container">
+        <div class="lesson-grid" id="lessonGrid"></div>
+      </div>
+    </aside>
+    <!-- Main Content -->
+    <main class="vocab-main" id="adminMain">
+      <div class="vocab-card intro">
+        <h2>Chọn nhóm từ vựng để chỉnh sửa</h2>
+      </div>
+    </main>
+    <!-- Modal edit từ vựng -->
+    <div class="modal" id="editWordModal" style="visibility:hidden;opacity:0;">
+      <div class="modal-content">
+        <i class="fa-solid fa-xmark modal-close"></i>
+        <div class="modal-body" id="editWordBody"></div>
+      </div>
+    </div>
+    <script type="module" src="../js/admin.js"></script>
+  </body>
+</html> 
