@@ -148,6 +148,9 @@ export class QuizManager {
       this.correctCount = 0;
       this.renderCurrentQuiz();
       this.updateProgressState();
+      DOM.menuPanel.style.display = "none";
+      DOM.settingsPanel.style.display = "none";
+      DOM.quizQuitBtn.classList.add("show");
     }
   };
 
@@ -268,6 +271,8 @@ export class QuizManager {
       btn.removeEventListener("pointerup", this.newLearnHandler);
       btn.addEventListener("pointerup", this.newLearnHandler);
     });
+
+    DOM.quizQuitBtn.addEventListener("pointerup", this.quitQuiz);
   }
 
   /**
@@ -866,9 +871,7 @@ export class QuizManager {
    */
   nextQuiz() {
     if (this.isCompleted) {
-      window.vocabApp.lessonManager.loadLessonData(
-        window.vocabApp.lessonManager.currentLesson
-      );
+      this.quitQuiz();
       return;
     }
 
@@ -912,6 +915,19 @@ export class QuizManager {
     if (progressBar) {
       progressBar.style.setProperty("--progress", `${percent}%`);
     }
+  }
+
+  /**
+   * Thoát Quiz
+   */
+  quitQuiz() {
+    DOM.menuPanel.style.display = "";
+    DOM.settingsPanel.style.display = "";
+    DOM.quizQuitBtn.classList.remove("show");
+    window.vocabApp.footerManager.hideFooter();
+    window.vocabApp.lessonManager.loadLessonData(
+      window.vocabApp.lessonManager.currentLesson
+    );
   }
 
   /**

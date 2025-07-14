@@ -35,6 +35,7 @@ export const DOM = {
 
   // Overlay
   lessonOverlay: document.getElementById("lessonOverlay"),
+  quizQuitBtn: document.querySelector(".quit-quiz-btn"),
 };
 
 // Kiểm tra và log warning nếu có element không tồn tại
