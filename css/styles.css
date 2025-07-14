@@ -144,7 +144,7 @@ body.no-scroll {
     transform 0.5s ease, border 0.5s ease;
 }
 
-.lesson-menu .level-item:hover {
+/* .lesson-menu .level-item:hover {
   border: 2px solid var(--color-correct);
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
   transform: translateY(-1px);
@@ -154,7 +154,7 @@ body.no-scroll {
   transform: scale(0.98);
   border: 3px solid var(--color-correct);
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
+} */
 
 .lesson-menu .level-item.active {
   border: 2px solid var(--color-correct);
@@ -306,13 +306,13 @@ body.no-scroll {
   transition: all 0.5s ease;
 }
 
-.vocab-type:hover {
+/* .vocab-type:hover {
   opacity: 0.5;
 }
 
 .vocab-type:active {
   opacity: 0.8;
-}
+} */
 
 .vocab-pronun {
   display: inline-flex;
@@ -507,24 +507,24 @@ svg path {
 }
 
 /* Hover: sáng + bóng nhẹ */
-.footer-next:hover,
+/* .footer-next:hover,
 .menu-btn:hover,
 .settings-btn:hover,
 .audio-btn:hover,
 .example-audio:hover {
   opacity: 0.5;
-}
+} */
 
 /* Active: tối nhẹ và bóng chìm xuống */
-.footer-next:active,
+/* .footer-next:active,
 .menu-btn:active,
 .settings-btn:active,
 .audio-btn:active,
 .example-audio:active {
   opacity: 0.8;
-}
+} */
 
-.menu-btn:hover,
+/* .menu-btn:hover,
 .settings-btn:hover {
   opacity: 1;
 }
@@ -542,7 +542,7 @@ svg path {
 .menu-btn:active i,
 .settings-btn:active i {
   opacity: 0.8;
-}
+} */
 
 /* Cài đặt giao diện khối và dropdown */
 .setting-group {
@@ -565,13 +565,13 @@ svg path {
   transition: background-color 0.5s ease, box-shadow 0.5s ease;
 }
 
-.setting-item:hover {
+/* .setting-item:hover {
   opacity: 0.5;
 }
 
 .setting-item:active {
   opacity: 0.8;
-}
+} */
 
 .setting-dropdown {
   display: none;
@@ -606,13 +606,13 @@ svg path {
   pointer-events: none;
   color: var(--color-text);
 }
-.setting-dropdown div:hover {
+/* .setting-dropdown div:hover {
   opacity: 0.5;
 }
 
 .setting-dropdown div:active {
   opacity: 0.8;
-}
+} */
 
 .setting-dropdown i {
   color: var(--color-text);
@@ -660,9 +660,9 @@ svg path {
   cursor: pointer;
 }
 
-.lesson-menu .sub-menu li:hover {
+/* .lesson-menu .sub-menu li:hover {
   opacity: 0.6;
-}
+} */
 
 /* Khi mở sub-menu */
 .lesson-menu > li.level-item.active > .sub-menu {
@@ -719,25 +719,25 @@ svg path {
   color: #403d39;
 }
 
-.choices-area .choice:hover {
+/* .choices-area .choice:hover {
   opacity: 0.5;
 }
 
 .choices-area .choice:active {
   opacity: 0.8;
-}
+} */
 
 .choices-area .choice.chosen {
   opacity: 0.8;
 }
 
-.choices-area .choice.chosen:hover {
+/* .choices-area .choice.chosen:hover {
   opacity: 0.8;
 }
 
 .choices-area .choice.chosen:active {
   opacity: 0.8;
-}
+} */
 
 .question-audio-btn {
   width: 80px;
@@ -848,14 +848,14 @@ svg path {
   visibility: visible;
 }
 
-.spellcheck-container .spellcheck-char:hover {
+/* .spellcheck-container .spellcheck-char:hover {
   border: 2px var(--color-correct-content) solid;
 }
 
 .spellcheck-container .spellcheck-char:active {
   border: 2px var(--color-correct-content) solid;
   background-color: var(--color-correct);
-}
+} */
 
 .spellcheck-button {
   width: 100%;
@@ -888,7 +888,7 @@ svg path {
   display: none;
 }
 
-.spellcheck-check-btn:hover,
+/* .spellcheck-check-btn:hover,
 .spellcheck-hint-btn:hover,
 .input-del-btn:hover {
   opacity: 0.5;
@@ -898,7 +898,7 @@ svg path {
 .spellcheck-hint-btn:active,
 .input-del-btn:active {
   opacity: 0.8;
-}
+} */
 
 /* Grid cho lesson-circle-btn (responsive, không cố định số cột) */
 .lesson-container {
@@ -975,11 +975,11 @@ svg path {
   border: 2px var(--color-secondary) solid;
 }
 
-.lesson-circle-btn:hover,
+/* .lesson-circle-btn:hover,
 .lesson-circle-btn:focus {
   opacity: 0.7;
   z-index: 2;
-}
+} */
 .lesson-circle-btn.active {
   outline: 2px solid var(--color-default-content);
   outline-offset: 2px;
@@ -1058,9 +1058,9 @@ svg path {
   background: var(--color-wrong);
   border-color: var(--color-wrong-content);
 }
-.lesson-btn:hover {
+/* .lesson-btn:hover {
   opacity: 0.7;
-}
+} */
 
 /* Bảng từ vựng */
 .lesson-table {
@@ -1104,13 +1104,13 @@ svg path {
   cursor: pointer;
 }
 
-body > main > table > tbody > tr > td:nth-child(4):hover .word-info-btn {
+/* body > main > table > tbody > tr > td:nth-child(4):hover .word-info-btn {
   opacity: 0.5;
 }
 
 body > main > table > tbody > tr > td:nth-child(4):active .word-info-btn {
   opacity: 0.8;
-}
+} */
 
 body > main > table > tbody > tr > td:nth-child(4) {
   text-align: right;
@@ -1196,12 +1196,12 @@ body > main > table > thead > tr > th:nth-child(1) {
   background: none;
   border: none;
 }
-.modal-close:hover {
+/* .modal-close:hover {
   opacity: 0.5;
 }
 .modal-close:active {
   opacity: 0.8;
-}
+} */
 
 .modal-body {
   width: 100%;
