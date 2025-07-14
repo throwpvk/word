@@ -60,9 +60,11 @@ export class FooterManager {
    * @param {string} type - Loại thông báo (correct/wrong/empty)
    * @param {string} text - Nội dung thông báo
    */
-  showFooter(type) {
+  showFooter(type = "none") {
     const text =
-      type === "correct"
+      type === "none"
+        ? ""
+        : type === "correct"
         ? "Chính xác. Tuyệt vời!"
         : "Sai mất rồi. Cố gắng chút nữa!";
 

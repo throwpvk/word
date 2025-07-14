@@ -9,13 +9,18 @@ export class QuizManager {
   constructor() {
     this.words = [];
     this.currentLessonWords = [];
-    this.isEnableAudioQuiz = true;
+    this.isEnableAudioQuiz = false;
     this.isEnableSpellQuiz = true;
+    this.isAutoNextQuiz = true;
     this.currentQuizIndex = 0;
     this.wordsPerSesssion = 5;
     this.audioInstance = null;
     this.currentNewLearnStartId = 0;
     this.currentNewLearnPhase = 1;
+    this.currentQuizIndex = 0;
+    this.correctCount = 0;
+    this.isCompleted = false;
+    this.quizzes = [];
     this.init();
   }
 
@@ -59,7 +64,7 @@ export class QuizManager {
         DOM.vocabMain.innerHTML = this.getQuizHTMLByType(
           1,
           2,
-          Math.floor(Math.random() * 5) + 1
+          this.QUIZ_TYPES.SPELL
         );
         this.bindQuizBtnEvent();
       });
@@ -81,6 +86,7 @@ export class QuizManager {
     const answer = vocabMain.querySelector(".answer-text");
     const char = e.currentTarget.dataset.char;
     answer.textContent += char === "⎵" ? " " : char;
+    this.spellCheckHandler(e);
   };
 
   /**
@@ -120,6 +126,8 @@ export class QuizManager {
     if (word.length > 0) {
       answer.textContent += word[0];
     }
+
+    this.spellCheckHandler(e);
   };
 
   /**
@@ -135,10 +143,41 @@ export class QuizManager {
     if (this.currentNewLearnPhase === this.LEARN_PHASE.LEARN) {
       const wordIds = [start, start + 1, start + 2, start + 3, start + 4];
       const quizzes = this.getQuizOrder(wordIds, this.LEARN_PHASE.LEARN);
-      console.log(quizzes);
-      // TODO
+      this.quizzes = quizzes;
+      this.currentQuizIndex = 0;
+      this.correctCount = 0;
+      this.renderCurrentQuiz();
+      this.updateProgressState();
     }
   };
+
+  /**
+   * Xử lý sự kiện nhấn nút Kiểm tra trong bài quiz spell
+   */
+  spellCheckHandler = (e) => {
+    const vocabMain = e.currentTarget.closest(".vocab-main");
+    const answer = vocabMain.querySelector(".answer-text");
+    const word = answer.dataset.word;
+    let isCorrect = false;
+    if (word.toLowerCase() === answer.textContent.toLowerCase()) {
+      isCorrect = true;
+    }
+
+    if (isCorrect) {
+      this.handleChosenAnswer(isCorrect);
+      answer.classList.add("correct");
+      if (this.isAutoNextQuiz) {
+        setTimeout(() => {
+          this.nextQuiz();
+        }, 2000);
+      } else {
+        window.vocabApp.footerManager.showFooter(
+          `${isCorrect ? "correct" : "wrong"}`
+        );
+      }
+    }
+  };
+
   /**
    * Xử lý sự kiện nhấn nút Kiểm tra trong bài quiz spell
    */
@@ -149,15 +188,22 @@ export class QuizManager {
     let isCorrect = false;
     if (word.toLowerCase() === answer.textContent.toLowerCase()) {
       isCorrect = true;
-      window.vocabApp.footerManager.showFooter("correct");
-    } else {
-      window.vocabApp.footerManager.showFooter("wrong");
     }
-    // TODO
+
+    this.handleChosenAnswer(isCorrect);
+    if (this.isAutoNextQuiz) {
+      setTimeout(() => {
+        this.nextQuiz();
+      }, 1500);
+    } else {
+      window.vocabApp.footerManager.showFooter(
+        `${isCorrect ? "correct" : "wrong"}`
+      );
+    }
   };
 
   /**
-   * Xử lý sự kiện nhấn chọn kết quả trong bài quiz spell
+   * Xử lý sự kiện nhấn chọn kết quả trong bài quiz
    */
   choiceCheckHandler = (e) => {
     const vocaMain = e.currentTarget.closest(".vocab-main");
@@ -174,8 +220,14 @@ export class QuizManager {
       choice.classList.add("chosen");
     });
 
-    // TODO
-    window.vocabApp.footerManager.showFooter(result);
+    this.handleChosenAnswer(isCorrect);
+    if (this.isAutoNextQuiz) {
+      setTimeout(() => {
+        this.nextQuiz();
+      }, 1500);
+    } else {
+      window.vocabApp.footerManager.showFooter(result);
+    }
   };
 
   /**
@@ -780,6 +832,26 @@ export class QuizManager {
   }
 
   /**
+   * Render màn hình quiz
+   */
+  renderCurrentQuiz() {
+    if (this.isCompleted) {
+      DOM.vocabMain.innerHTML = `<h2>Đã hoàn thành bài học 🎉</h2>`;
+      window.vocabApp.footerManager.showFooter();
+      return;
+    }
+
+    const quiz = this.quizzes[this.currentQuizIndex];
+    console.log(this.currentQuizIndex);
+
+    DOM.vocabMain.innerHTML = quiz.html;
+    if (quiz.quizType === this.QUIZ_TYPES.INTRO) {
+      window.vocabApp.footerManager.showFooter();
+    }
+    this.bindQuizBtnEvent();
+  }
+
+  /**
    * Kiểm tra đáp án
    * @param {string} selectedAnswer - Đáp án được chọn
    * @param {string} correctAnswer - Đáp án đúng
@@ -793,11 +865,53 @@ export class QuizManager {
    * Chuyển sang quiz tiếp theo
    */
   nextQuiz() {
-    if (!DOM.vocabMain) return;
+    if (this.isCompleted) {
+      window.vocabApp.lessonManager.loadLessonData(
+        window.vocabApp.lessonManager.currentLesson
+      );
+      return;
+    }
 
-    DOM.vocabMain.innerHTML = this.quizTemplates[this.currentQuizIndex].html;
-    this.currentQuizIndex =
-      (this.currentQuizIndex + 1) % this.quizTemplates.length;
+    if (
+      this.quizzes[this.currentQuizIndex].quizType === this.QUIZ_TYPES.INTRO
+    ) {
+      this.correctCount++;
+      this.updateProgressState();
+    }
+
+    this.currentQuizIndex++;
+    if (this.quizzes[this.currentQuizIndex]) {
+      this.renderCurrentQuiz();
+    } else {
+      console.log("Đã học xong");
+      this.isCompleted = true;
+      this.renderCurrentQuiz(true);
+    }
+  }
+
+  /**
+   * Xử lý khi chọn sai đáp án
+   */
+  handleChosenAnswer(isCorrect) {
+    if (isCorrect) {
+      this.correctCount++;
+    } else {
+      const quiz = this.quizzes[this.currentQuizIndex];
+      if (quiz) this.quizzes.push(quiz);
+    }
+    this.updateProgressState();
+  }
+
+  /**
+   * Cập nhật trạng thái thanh progress
+   */
+  updateProgressState() {
+    const percent = (this.correctCount / 30) * 100;
+    const progressBar = document.querySelector(".progress-bar");
+
+    if (progressBar) {
+      progressBar.style.setProperty("--progress", `${percent}%`);
+    }
   }
 
   /**

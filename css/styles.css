@@ -774,6 +774,12 @@ svg path {
   pointer-events: none;
   line-height: 1.2;
 }
+
+.answer-text.correct {
+  background-color: var(--color-correct);
+  border: 2px var(--color-correct-content) solid;
+}
+
 .input-del-btn {
   width: 50px;
   height: 47px;
@@ -876,6 +882,10 @@ svg path {
 .spellcheck-hint-btn {
   border: 2px var(--color-default-content) solid;
   background-color: var(--color-default);
+}
+
+.spellcheck-check-btn {
+  display: none;
 }
 
 .spellcheck-check-btn:hover,
