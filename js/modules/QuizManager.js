@@ -60,13 +60,13 @@ export class QuizManager {
     document
       .querySelector(".footer-next")
       ?.addEventListener("pointerup", () => {
-        // this.nextQuiz();
-        DOM.vocabMain.innerHTML = this.getQuizHTMLByType(
-          1,
-          2,
-          this.QUIZ_TYPES.SPELL
-        );
-        this.bindQuizBtnEvent();
+        this.nextQuiz();
+        // DOM.vocabMain.innerHTML = this.getQuizHTMLByType(
+        //   1,
+        //   2,
+        //   this.QUIZ_TYPES.SPELL
+        // );
+        // this.bindQuizBtnEvent();
       });
   }
 
